@@ -1,0 +1,8 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.bracketPairColorization.enabled": true,
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.wordWrap": "on"
+  }
+}
