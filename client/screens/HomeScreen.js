@@ -1,20 +1,18 @@
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import { StyleSheet, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import { useSearchProductQuery } from '../services/spoonacular';
+import { ApplicationProvider, Layout, Text, Button, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 const HomeScreen = () => {
-  const { data, error, isLoading } = useSearchProductQuery('pizza');
-  if (isLoading) {
-    return <Text>Loading...</Text>;
-  }
-  if (error) {
-    return <Text>Oops, an error occured</Text>;
-  }
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
   return (
-    <SafeAreaView>
-      <View>
-        {console.log(data)}
-        <Text>Home Screen</Text>
-      </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <BottomNavigation selectedIndex={selectedIndex} onSelect={(index) => setSelectedIndex(index)} style={{ width: '100%', position: 'absolute', bottom: 0 }}>
+          <BottomNavigationTab title="USERS" />
+          <BottomNavigationTab title="ORDERS" />
+          <BottomNavigationTab title="TRANSACTIONS" />
+        </BottomNavigation>
+      </Layout>
     </SafeAreaView>
   );
 };
