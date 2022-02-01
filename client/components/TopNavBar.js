@@ -3,14 +3,7 @@ import React from 'react';
 import { TopNavigation, Text } from '@ui-kitten/components';
 
 const TopNavBar = () => {
-  return (
-
-      <TopNavigation
-  title={evaProps => <Text {...evaProps}>👤</Text>}
-  subtitle={evaProps => <Text {...evaProps}>My Profile</Text>}
-/>
-
-  );
+  return <TopNavigation title={(evaProps) => <Text {...evaProps}>👤</Text>} subtitle={(evaProps) => <Text {...evaProps}>My Profile</Text>} />;
 };
 
 export default TopNavBar;
