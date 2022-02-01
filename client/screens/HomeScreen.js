@@ -3,16 +3,15 @@ import React from 'react';
 import { useSearchProductQuery } from '../services/spoonacular';
 import { ApplicationProvider, Layout, Divider, Text, Button, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 import TopNav from '../components/TopNav';
-import LogoComponent from '../components/LogoComponent'
-import SearchBarComponent from '../components/SearchBarComponent'
-import MacroBar from '../components/MacroBar'
-import MealContainer from '../components/MealContainer'
-
+import LogoComponent from '../components/LogoComponent';
+import SearchBarComponent from '../components/SearchBarComponent';
+import MacroBar from '../components/MacroBar';
+import MealContainer from '../components/MealContainer';
 
 const HomeScreen = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <TopNav />
         <LogoComponent />

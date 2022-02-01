@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Searchbar } from 'react-native-paper';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectSearchTerm, setSearchTerm, selectSearchTermResults, setSearchTermResults, selectSkip, setSkip } from '../slices/searchSlice';
+import { useSearchProductQuery } from '../services/spoonacular';
 
 const SearchBarComponent = () => {
-  const [searchQuery, setSearchQuery] = React.useState('');
+  const searchTerm = useSelector(selectSearchTerm);
+  const searchTermResults = useSelector(selectSearchTermResults);
+  const skip = useSelector(selectSkip);
+  const dispatch = useDispatch();
 
-  const onChangeSearch = query => setSearchQuery(query);
+  useEffect(() => {
+    dispatch(setSkip(true));
+  }, [searchTermResults]);
 
-  return (
-     <Searchbar
-      placeholder="Search"
-      onChangeText={onChangeSearch}
-      value={searchQuery}
-    />
-  );
+  const onChange = (query) => dispatch(setSearchTerm(query));
+
+  const { data, error, isLoading } = useSearchProductQuery(searchTerm, { skip });
+  if (data) dispatch(setSearchTermResults(data));
+
+  const onSearchIconPress = () => {
+    dispatch(setSkip(false));
+  };
+
+  console.log(searchTermResults);
+  console.log(skip);
+
+  return <Searchbar placeholder="Search" onIconPress={onSearchIconPress} onChangeText={onChange} value={searchTerm} />;
 };
 
 export default SearchBarComponent;
