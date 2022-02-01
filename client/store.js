@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import navReducer from './slices/navSlice';
+import searchReducer from './slices/searchSlice';
 import { spoonacularApi } from './services/spoonacular';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore({
   reducer: {
-    nav: navReducer,
+    search: searchReducer,
     // Add the generated reducer as a specific top-level slice
     [spoonacularApi.reducerPath]: spoonacularApi.reducer
   },
