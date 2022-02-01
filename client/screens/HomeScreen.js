@@ -1,9 +1,10 @@
 import { StyleSheet, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import { useSearchProductQuery } from '../services/spoonacular';
-import { ApplicationProvider, Layout, Divider, Text, Button, TopNavigation, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
+import { ApplicationProvider, Layout, Divider, Text, Button, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
 import TopNav from '../components/TopNav';
 import LogoComponent from '../components/LogoComponent'
+import SearchBarComponent from '../components/SearchBarComponent'
 import MacroBar from '../components/MacroBar'
 import MealContainer from '../components/MealContainer'
 
@@ -15,6 +16,7 @@ const HomeScreen = () => {
       <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <TopNav />
         <LogoComponent />
+        <SearchBarComponent />
         <MacroBar />
         <MealContainer />
         <BottomNavigation selectedIndex={selectedIndex} onSelect={(index) => setSelectedIndex(index)} style={{ width: '100%', position: 'absolute', bottom: 0 }}>
