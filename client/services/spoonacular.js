@@ -21,7 +21,7 @@ export const spoonacularApi = createApi({
             mutatedResponse.push(result);
           });
         });
-        return mutatedResponse.filter((result) => ['recipes', 'menuItems', 'simpleFoods'].includes(result.category));
+        return mutatedResponse.filter((result) => ['recipes', 'products', 'menuItems', 'simpleFoods'].includes(result.category));
       }
     })
   })

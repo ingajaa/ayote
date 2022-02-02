@@ -1,17 +1,41 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Divider } from '@ui-kitten/components';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSelectedSearchResult } from '../slices/searchSlice';
+import { useNavigation } from '@react-navigation/native';
 
 const SearchResultTile = ({ item }) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+
+  const selectRoute = (category) => {
+    if (category === 'products') return 'ProductDetailsScreen';
+    if (category === 'simpleFoods') return 'SimpleFoodDetailsScreen';
+    if (category === 'recipes') return 'RecipeDetailsScreen';
+    if (category === 'menuItems') return 'MenuItemDetailsScreen';
+  };
+
   return (
-    <View>
-      <TouchableOpacity style={styles.listItem}>
-        <View style={styles.metaInfo}>
-          <Text style={styles.title}>{`${item.name.toUpperCase()}`}</Text>
+    <>
+      {item && (
+        <View>
+          <TouchableOpacity
+            style={styles.listItem}
+            onPress={() => {
+              dispatch(setSelectedSearchResult(item));
+              console.log(item);
+              navigation.navigate(selectRoute(item.category));
+            }}
+          >
+            <View style={styles.metaInfo}>
+              <Text style={styles.title}>{`${item.name.toUpperCase()}`}</Text>
+            </View>
+          </TouchableOpacity>
+          <Divider />
         </View>
-      </TouchableOpacity>
-      <Divider />
-    </View>
+      )}
+    </>
   );
 };
 

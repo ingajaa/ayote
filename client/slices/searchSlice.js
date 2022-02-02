@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   searchTerm: null,
   searchTermResults: null,
-  skip: true
+  skip: true,
+  selectedSearchResult: null
 };
 
 export const searchSlice = createSlice({
@@ -18,11 +19,14 @@ export const searchSlice = createSlice({
     },
     setSkip: (state, action) => {
       state.skip = action.payload;
+    },
+    setSelectedSearchResult: (state, action) => {
+      state.selectedSearchResult = action.payload;
     }
   }
 });
 
-export const { setSearchTerm, setSearchTermResults, setSkip } = searchSlice.actions;
+export const { setSearchTerm, setSearchTermResults, setSkip, setSelectedSearchResult } = searchSlice.actions;
 
 // Selectors, for "grabbing" data
 export const selectSearchTerm = (state) => {
@@ -33,6 +37,10 @@ export const selectSearchTermResults = (state) => {
 };
 export const selectSkip = (state) => {
   return state.search.skip;
+};
+
+export const selectSelectedSearchResult = (state) => {
+  return state.search.selectedSearchResult;
 };
 
 export default searchSlice.reducer;
