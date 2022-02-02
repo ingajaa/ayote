@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-//import * as eva from '@eva-design/eva';
 import { Layout, Button, Text } from '@ui-kitten/components';
-//import { default as theme } from '../assets/custom-theme.json';
+import { TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const WaterReminderIcon = () => {
+  const navigation = useNavigation();
+
   return (
-    <View>
-      <Text style={styles.waterStyle}> 💧 </Text>
-    </View>
+    <TouchableOpacity onPress={() => navigation.navigate('WaterTrackScreen')}>
+    <Text>Water</Text>
+  </TouchableOpacity>
   );
 };
 

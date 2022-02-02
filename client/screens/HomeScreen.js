@@ -2,7 +2,7 @@ import { StyleSheet, View, SafeAreaView } from 'react-native';
 import React from 'react';
 import { useSearchProductQuery } from '../services/spoonacular';
 import { ApplicationProvider, Layout, Divider, Text, Button, TopNavigation, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
-import TopNavBar from '../components/TopNavBar';
+import TopNav from '../components/TopNav';
 import LogoComponent from '../components/LogoComponent';
 import SearchBarComponent from '../components/SearchBarComponent';
 import MacroBar from '../components/MacroBar';
@@ -13,7 +13,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
-        <TopNavBar />
+        <TopNav />
         <LogoComponent />
         <SearchBarComponent />
         <MacroBar />
