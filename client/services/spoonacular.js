@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { SearchResults } from './types'
+import { SPOONACULAR_API_KEY } from '@env';
 
 // Define a service using a base URL and expected endpoints
 export const spoonacularApi = createApi({
@@ -7,7 +7,7 @@ export const spoonacularApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.spoonacular.com' }),
   endpoints: (builder) => ({
     searchProduct: builder.query({
-      query: (searchTerm) => `/food/products/search?query=${searchTerm}&apiKey=5fed4e6aee5e41ae8add5eb1c05821ac`
+      query: (searchTerm) => `/food/products/search?query=${searchTerm}&apiKey=${SPOONACULAR_API_KEY}`
     })
   })
 });
