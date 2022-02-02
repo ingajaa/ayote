@@ -10,20 +10,18 @@ const SearchBarComponent = () => {
   const skip = useSelector(selectSkip);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(setSkip(true));
-  }, [searchTermResults]);
-
   const onChange = (query) => dispatch(setSearchTerm(query));
 
   const { data, error, isLoading } = useSearchAllFoodQuery(searchTerm, { skip });
-  if (data) dispatch(setSearchTermResults(data));
+  if (data) {
+    dispatch(setSearchTermResults(data))
+    dispatch(setSkip(true))
+  };
 
   const onSearchIconPress = () => {
     dispatch(setSkip(false));
   };
 
-  console.log(searchTermResults?.filter((result) => result.category === 'menuItems'));
 
   return <Searchbar placeholder="Search" onIconPress={onSearchIconPress} onChangeText={onChange} value={searchTerm} />;
 };
