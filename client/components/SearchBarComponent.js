@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Searchbar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSearchTerm, setSearchTerm, selectSearchTermResults, setSearchTermResults, selectSkip, setSkip } from '../slices/searchSlice';
-import { useSearchProductQuery } from '../services/spoonacular';
+import { useSearchAllFoodQuery } from '../services/spoonacular';
 
 const SearchBarComponent = () => {
   const searchTerm = useSelector(selectSearchTerm);
@@ -16,15 +16,14 @@ const SearchBarComponent = () => {
 
   const onChange = (query) => dispatch(setSearchTerm(query));
 
-  const { data, error, isLoading } = useSearchProductQuery(searchTerm, { skip });
+  const { data, error, isLoading } = useSearchAllFoodQuery(searchTerm, { skip });
   if (data) dispatch(setSearchTermResults(data));
 
   const onSearchIconPress = () => {
     dispatch(setSkip(false));
   };
 
-  console.log(searchTermResults);
-  console.log(skip);
+  console.log(searchTermResults?.filter((result) => result.category === 'menuItems'));
 
   return <Searchbar placeholder="Search" onIconPress={onSearchIconPress} onChangeText={onChange} value={searchTerm} />;
 };
