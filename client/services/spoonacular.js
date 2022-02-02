@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { SPOONACULAR_API_KEY } from '@env';
-//import { camelCase } from 'lodash';
+import { camelCase } from 'lodash';
 
 // Define a service using a base URL and expected endpoints
 export const spoonacularApi = createApi({
@@ -17,11 +17,11 @@ export const spoonacularApi = createApi({
         const mutatedResponse = [];
         response.searchResults.forEach((categoryResults) => {
           categoryResults.results.forEach((result) => {
-            result.category = categoryResults.name;
+            result.category = camelCase(categoryResults.name);
             mutatedResponse.push(result);
           });
         });
-        return mutatedResponse;
+        return mutatedResponse.filter((result) => ['recipes', 'menuItems', 'simpleFoods'].includes(result.category));
       }
     })
   })

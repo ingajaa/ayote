@@ -12,6 +12,7 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
 // Screens
 import HomeScreen from './screens/HomeScreen';
+import SearchResultsScreen from './screens/SearchResultsScreen';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -23,6 +24,7 @@ export default function App() {
           <SafeAreaProvider>
             <Stack.Navigator>
               <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="SearchResultsScreen" component={SearchResultsScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
           </SafeAreaProvider>
         </NavigationContainer>
