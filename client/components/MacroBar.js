@@ -18,8 +18,9 @@ const styles = StyleSheet.create({
     borderColor: 'lightgrey',
     borderWidth: 1,
     marginVertical: 20,
-    paddingHorizontal: 120,
-    paddingVertical: 40,
+    paddingHorizontal: 128,
+    paddingVertical: 45,
+    marginHorizontal: 20,
     borderRadius: 5
   },
 })
