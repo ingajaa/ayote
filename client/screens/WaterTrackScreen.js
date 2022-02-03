@@ -16,11 +16,14 @@ const R = CIRCLE_LENGTH / (2 * Math.PI)
 const AnimatedCircle = Animated.createAnimatedComponent(Circle)
 
 const WaterTrackScreen = () => {
+  const progress = useSharedValue(0);
 
-  const progress = useSharedValue(0)
+  useEffect(() => {
+    progress.value = withTiming(1, { duration: 2000});
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>WATAAH</Text>
       <Svg>
         <Circle
         cx={width / 2}
