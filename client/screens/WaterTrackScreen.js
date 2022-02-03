@@ -12,6 +12,8 @@ import Animated, {
   useAnimatedProps,
 } from 'react-native-reanimated';
 import { ReText } from 'react-native-redash'
+import { useDispatch, useSelector } from 'react-redux';
+import selectGlasses from '../slices/waterSlice';
 
 const BACKGROUND_COLOR = '#d4f1f9';
 const BACKGROUND_STROKE_COLOR = '#A6E1FA'
@@ -19,28 +21,26 @@ const STROKE_COLOR = '#1c7fa6';
 
 const { width, height } = Dimensions.get('window');
 
-const CIRCLE_LENGTH = 1000;
+const CIRCLE_LENGTH = 850;
 const R = CIRCLE_LENGTH / (2 * Math.PI)
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle)
 
 const WaterTrackScreen = () => {
+  //const glasses  = useSelector(selectGlasses);
   const progress = useSharedValue(0);
 
-  // useEffect(() => {
-  //   progress.value = withTiming(1, { duration: 2000});
-  // }, []);
-
   const animatedProps = useAnimatedProps(() => ({
-    strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value)
+    strokeDashoffset: CIRCLE_LENGTH * (1 - 0.1 * progress.value)
   }));
 
   const progressText = useDerivedValue(() => {
-    return `${Math.floor(progress.value * 100)}`
+    return `${Math.floor(progress.value)}`
   })
 
   const onPress = useCallback(() => {
-    progress.value = withTiming(progress.value > 0 ? 0 : 1, { duration: 2000});
+    // addGlass()
+    progress.value = withTiming(progress.value >= 10 ? 1 : progress.value + 1, { duration: 200});
   }, []);
 
   return (
@@ -82,11 +82,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   progressText: {
-    fontSize: 80,
+    fontSize: 70,
     color: '#1c7fa6',
     fontWeight: 'bold',
     width: 200,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   button: {
     position: 'absolute',
@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 25,
     color: 'white',
-    letterSpacing: 2.0
+    letterSpacing: 2.0,
+    fontFamily: 'Helvetica'
   }
 });
