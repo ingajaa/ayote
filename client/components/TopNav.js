@@ -1,26 +1,31 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import UserProfile from './UserProfile';
-import WaterReminderIcon from './WaterReminderIcon';
+import { StyleSheet } from 'react-native';
+import { Icon, Tab, TabBar } from '@ui-kitten/components';
+
+const PersonIcon = (props) => (
+  <Icon {...props} name='person-outline'/>
+);
+
 
 const TopNav = () => {
+
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
   return (
-      <View style={styles.navBarStyle}>
-        <UserProfile />
-        <WaterReminderIcon />
-      </View>
+    <TabBar
+      selectedIndex={selectedIndex}
+      onSelect={index => setSelectedIndex(index)}>
+      <Tab style={styles.profileIconStyle} icon={PersonIcon} title='USERS'/>
+    </TabBar>
   );
 };
 
 export default TopNav;
 
 const styles = StyleSheet.create({
-  navBarStyle: {
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignContent: 'space-between',
-    marginHorizontal: 10,
-    marginVertical: 10
-  },
-})
+  profileIconStyle: {
+    alignItems: 'flex-start',
+    marginRight: 300,
+    marginTop: 20,
+  }
+});
