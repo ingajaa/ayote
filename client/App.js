@@ -14,7 +14,6 @@ import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import HomeScreen from './screens/HomeScreen';
 import SearchResultsScreen from './screens/SearchResultsScreen';
 import ProductDetailsScreen from './screens/ProductDetailsScreen';
-import MenuItemDetailsScreen from './screens/MenuItemDetailsScreen';
 import SimpleFoodDetailsScreen from './screens/SimpleFoodDetailsScreen';
 import RecipeDetailsScreen from './screens/RecipeDetailsScreen';
 import WaterTrackScreen from './screens/WaterTrackScreen';
@@ -31,7 +30,6 @@ export default function App() {
               <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
               <Stack.Screen name="SearchResultsScreen" component={SearchResultsScreen} options={{ headerShown: false }} />
               <Stack.Screen name="ProductDetailsScreen" component={ProductDetailsScreen} options={{ headerShown: false }} />
-              <Stack.Screen name="MenuItemDetailsScreen" component={MenuItemDetailsScreen} options={{ headerShown: false }} />
               <Stack.Screen name="SimpleFoodDetailsScreen" component={SimpleFoodDetailsScreen} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeDetailsScreen" component={RecipeDetailsScreen} options={{ headerShown: false }} />
               <Stack.Screen name="WaterTrackScreen" component={WaterTrackScreen} options={{ headerShown: false }} />
