@@ -18,9 +18,9 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle)
 const WaterTrackScreen = () => {
   const progress = useSharedValue(0);
 
-  useEffect(() => {
-    progress.value = withTiming(1, { duration: 2000});
-  }, []);
+  // useEffect(() => {
+  //   progress.value = withTiming(1, { duration: 2000});
+  // }, []);
 
   return (
     <View style={styles.container}>

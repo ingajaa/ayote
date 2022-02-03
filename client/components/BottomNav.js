@@ -14,9 +14,9 @@ const BottomNav = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const navigation = useNavigation();
   return (
-    <BottomNavigation selectedIndex={selectedIndex} onSelect={(index) => setSelectedIndex(index)} style={styles.navBar}>
+    <View style={styles.navBar}>
           <TouchableHighlight style={styles.touchableStyle} onPress={() => navigation.navigate('WaterTrackScreen')}>
-      <BottomNavigationTab style={styles.waterIcon} icon={DropletIcon} />
+      <BottomNavigationTab icon={DropletIcon} />
       </TouchableHighlight>
       <TouchableHighlight style={styles.touchableStyle}>
       <BottomNavigationTab icon={BellIcon} />
@@ -24,7 +24,7 @@ const BottomNav = () => {
       <TouchableHighlight style={styles.touchableStyle}>
       <BottomNavigationTab icon={UserIcon} />
       </TouchableHighlight>
-    </BottomNavigation>
+    </View>
   );
 };
 
@@ -37,9 +37,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     bottom: 0,
     paddingTop: 15,
-  },
-  waterIcon: {
-    backgroundColor: '#fff'
+    paddingBottom: 15,
+    flexDirection: 'row'
   },
   touchableStyle: {
     paddingHorizontal: 25,
