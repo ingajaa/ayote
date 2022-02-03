@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar'
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-import Animated, { useSharedValue } from 'react-native-reanimated';
+import Animated, {
+  useSharedValue,
+  useDerivedValue,
+  withTiming,
+  useAnimatedProps,
+} from 'react-native-reanimated';
 
 const BACKGROUND_COLOR = '#444B6F';
 const BACKGROUND_STROKE_COLOR = '#303858';
@@ -18,13 +23,22 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle)
 const WaterTrackScreen = () => {
   const progress = useSharedValue(0);
 
-  // useEffect(() => {
-  //   progress.value = withTiming(1, { duration: 2000});
-  // }, []);
+  useEffect(() => {
+    progress.value = withTiming(1, { duration: 2000});
+  }, []);
+
+  const animatedProps = useAnimatedProps(() => ({
+    strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value)
+  }));
+
+  const progressText = useDerivedValue(() => {
+    return `${Math.floor(progress.value * 100)}`
+  })
 
   return (
     <View style={styles.container}>
-      <Svg>
+      <Text style={styles.progressText}>{progressText.value}</Text>
+      <Svg style={{position: 'absolute'}}>
         <Circle
         cx={width / 2}
         cy={height / 2}
@@ -39,7 +53,8 @@ const WaterTrackScreen = () => {
         stroke={STROKE_COLOR}
         strokeWidth={15}
         strokeDasharray={CIRCLE_LENGTH}
-        strokeDashoffset={CIRCLE_LENGTH * 0.5}
+        animatedProps={animatedProps}
+        strokeLinecap={'round'}
         />
       </Svg>
       <StatusBar style='auto' />
@@ -52,8 +67,13 @@ export default WaterTrackScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: BACKGROUND_COLOR,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  progressText: {
+    fontSize: 50,
+    color: '#A6E1FA',
+    fontWeight: 'bold',
   }
 });
