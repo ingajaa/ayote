@@ -17,6 +17,7 @@ import ProductDetailsScreen from './screens/ProductDetailsScreen';
 import SimpleFoodDetailsScreen from './screens/SimpleFoodDetailsScreen';
 import RecipeDetailsScreen from './screens/RecipeDetailsScreen';
 import WaterTrackScreen from './screens/WaterTrackScreen';
+import TrackFoodScreen from './screens/TrackFoodScreen';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -33,6 +34,7 @@ export default function App() {
               <Stack.Screen name="SimpleFoodDetailsScreen" component={SimpleFoodDetailsScreen} options={{ headerShown: false }} />
               <Stack.Screen name="RecipeDetailsScreen" component={RecipeDetailsScreen} options={{ headerShown: false }} />
               <Stack.Screen name="WaterTrackScreen" component={WaterTrackScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="TrackFoodScreen" component={TrackFoodScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
           </SafeAreaProvider>
         </NavigationContainer>
