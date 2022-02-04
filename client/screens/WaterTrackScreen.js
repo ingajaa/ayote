@@ -45,6 +45,7 @@ const WaterTrackScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text>Glasses Of Water</Text>
       <ReText style={styles.progressText} text={progressText}/>
       <Svg style={{position: 'absolute'}}>
         <Circle
