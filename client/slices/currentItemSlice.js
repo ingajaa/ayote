@@ -12,7 +12,12 @@ const initialState = {
   carbsPerServing: null,
   fatPerServing: null,
   caloriesPerServing: null,
-  image: null
+  image: null,
+  trackedCalories: null,
+  trackedProtein: null,
+  trackedCarbs: null,
+  trackedFat: null,
+  trackedGrams: null
 };
 
 export const currentItemSlice = createSlice({
@@ -54,6 +59,21 @@ export const currentItemSlice = createSlice({
     },
     setImage: (state, action) => {
       state.image = action.payload;
+    },
+    setTrackedCalories: (state, action) => {
+      state.trackedCalories = action.payload;
+    },
+    setTrackedProtein: (state, action) => {
+      state.trackedProtein = action.payload;
+    },
+    setTrackedCarbs: (state, action) => {
+      state.trackedCarbs = action.payload;
+    },
+    setTrackedFat: (state, action) => {
+      state.trackedFat = action.payload;
+    },
+    setTrackedGrams: (state, action) => {
+      state.trackedGrams = action.payload;
     }
   }
 });
@@ -70,7 +90,12 @@ export const {
   setCarbsPerServing,
   setFatPerServing,
   setCaloriesPerServing,
-  setImage
+  setImage,
+  setTrackedCalories,
+  setTrackedProtein,
+  setTrackedCarbs,
+  setTrackedFat,
+  setTrackedGrams
 } = currentItemSlice.actions;
 
 export const selectId = (state) => {
@@ -119,6 +144,26 @@ export const selectCaloriesPerServing = (state) => {
 
 export const selectImage = (state) => {
   return state.currentItem.image;
+};
+
+export const selectTrackedCalories = (state) => {
+  return state.currentItem.trackedCalories;
+};
+
+export const selectTrackedProtein = (state) => {
+  return state.currentItem.trackedProtein;
+};
+
+export const selectTrackedCarbs = (state) => {
+  return state.currentItem.trackedCarbs;
+};
+
+export const selectTrackedFat = (state) => {
+  return state.currentItem.trackedFat;
+};
+
+export const selectTrackedGrams = (state) => {
+  return state.currentItem.trackedGrams;
 };
 
 export default currentItemSlice.reducer;
