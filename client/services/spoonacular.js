@@ -1,18 +1,26 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { SPOONACULAR_API_KEY } from '@env';
+import { SPOONACULAR_API_KEY, SPOONACULAR_API_HOST, SPOONACULAR_API_BASE_URL } from '@env';
 import { camelCase } from 'lodash';
 
 // Define a service using a base URL and expected endpoints
 export const spoonacularApi = createApi({
   reducerPath: 'spoonacularApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://api.spoonacular.com' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: SPOONACULAR_API_BASE_URL,
+    prepareHeaders: (headers) => {
+      headers.set('X-RapidAPI-Host', SPOONACULAR_API_HOST);
+      headers.set('X-RapidAPI-Key', SPOONACULAR_API_KEY);
+
+      return headers;
+    }
+  }),
   endpoints: (builder) => ({
     searchProduct: builder.query({
-      query: (searchTerm) => `/food/products/search?query=${searchTerm}&apiKey=${SPOONACULAR_API_KEY}`,
+      query: (searchTerm) => `/food/products/search?query=${searchTerm}`,
       transformResponse: (response) => response.products
     }),
     searchAllFood: builder.query({
-      query: (searchTerm) => `/food/search?query=${searchTerm}&apiKey=${SPOONACULAR_API_KEY}`,
+      query: (searchTerm, totalResults) => `/food/search?query=${searchTerm}&number=${totalResults}`,
       transformResponse: (response) => {
         const mutatedResponse = [];
         response.searchResults.forEach((categoryResults) => {
@@ -24,8 +32,19 @@ export const spoonacularApi = createApi({
         return mutatedResponse.filter((result) => ['recipes', 'simpleFoods'].includes(result.category));
       }
     }),
+    searchRecipes: builder.query({
+      query: (searchTerm, totalResults = 25) => `/recipes/search?query=${searchTerm}&number=${totalResults}`,
+      transformResponse: (response) => {
+        const mutatedResponse = [];
+        response.results.forEach((result) => {
+          result.category = 'recipes';
+          mutatedResponse.push(result);
+        });
+        return mutatedResponse;
+      }
+    }),
     getIngredientInformation: builder.query({
-      query: (ingredientId, amount = 1) => `/food/ingredients/${ingredientId}/information?amount=${amount}&apiKey=${SPOONACULAR_API_KEY}`,
+      query: (ingredientId, amount = 1) => `/food/ingredients/${ingredientId}/information?amount=${amount}`,
       transformResponse: (response) => {
         const mutatedResponse = {};
 
@@ -55,7 +74,7 @@ export const spoonacularApi = createApi({
       }
     }),
     getProductInformation: builder.query({
-      query: (productId) => `/food/products/${productId}?apiKey=${SPOONACULAR_API_KEY}`,
+      query: (productId) => `/food/products/${productId}`,
       transformResponse: (response) => {
         const mutatedResponse = {};
 
@@ -82,7 +101,7 @@ export const spoonacularApi = createApi({
       }
     }),
     getRecipeInformation: builder.query({
-      query: (recipeId) => `/recipes/${recipeId}/information?includeNutrition=true&apiKey=${SPOONACULAR_API_KEY}`,
+      query: (recipeId) => `/recipes/${recipeId}/information?includeNutrition=true`,
       transformResponse: (response) => {
         const mutatedResponse = {};
 
@@ -119,4 +138,4 @@ export const spoonacularApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useSearchProductQuery, useSearchAllFoodQuery, useGetIngredientInformationQuery, useGetRecipeInformationQuery, useGetProductInformationQuery } = spoonacularApi;
+export const { useSearchProductQuery, useSearchRecipesQuery, useSearchAllFoodQuery, useGetIngredientInformationQuery, useGetRecipeInformationQuery, useGetProductInformationQuery } = spoonacularApi;

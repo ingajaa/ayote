@@ -1,8 +1,9 @@
 import React from 'react';
 import { Layout, Text, Spinner, Card, Button } from '@ui-kitten/components';
-import { StyleSheet, SafeAreaView, View, Image } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Image, TouchableOpacity } from 'react-native';
 import { useGetRecipeInformationQuery } from '../services/spoonacular';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 import {
   selectId,
   setId,
@@ -31,7 +32,7 @@ const Header = (props) => (
 
 const Footer = (props) => (
   <View {...props} style={[props.style, styles.footerContainer]}>
-    <Button style={styles.footerControl} size="small">
+    <Button style={styles.footerControl} size="medium" onPress={() => props.navigation.navigate('TrackFoodScreen')}>
       TRACK
     </Button>
   </View>
@@ -40,6 +41,8 @@ const Footer = (props) => (
 const RecipeDetailsScreen = () => {
   const currentItemId = useSelector(selectId);
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   const { data, error, isLoading } = useGetRecipeInformationQuery(currentItemId);
   if (data) {
     console.log(data);
@@ -59,7 +62,7 @@ const RecipeDetailsScreen = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <Card style={styles.card} header={<Header data={data} />} footer={<Footer data={data} />}>
+          <Card style={styles.card} header={<Header data={data} />} footer={<Footer data={data} navigation={navigation} />}>
             <Image style={styles.image} source={{ uri: data.image }} />
             <Text>Caloric Breakdown (100g)</Text>
             <Text>Calories: {+(data.caloriesPerGram * 100).toFixed(2)}Kcal</Text>

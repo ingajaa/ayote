@@ -3,6 +3,7 @@ import searchReducer from './slices/searchSlice';
 import currentItemReducer from './slices/currentItemSlice';
 import waterReducer from './slices/waterSlice';
 import { spoonacularApi } from './services/spoonacular';
+import { ayoteApi } from './services/ayote';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore({
@@ -11,11 +12,12 @@ export const store = configureStore({
     currentItem: currentItemReducer,
     water: waterReducer,
     // Add the generated reducer as a specific top-level slice
-    [spoonacularApi.reducerPath]: spoonacularApi.reducer
+    [spoonacularApi.reducerPath]: spoonacularApi.reducer,
+    [ayoteApi.reducerPath]: ayoteApi.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(spoonacularApi.middleware)
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(spoonacularApi.middleware, ayoteApi.middleware)
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors

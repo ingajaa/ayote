@@ -4,7 +4,7 @@ import { Layout, List, ListItem, Divider, Button } from '@ui-kitten/components';
 import { Searchbar } from 'react-native-paper';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectSearchTerm, setSearchTerm, selectSearchTermResults, setSearchTermResults, selectSkip, setSkip } from '../slices/searchSlice';
-import { useSearchAllFoodQuery } from '../services/spoonacular';
+import { useSearchRecipesQuery } from '../services/spoonacular';
 import SearchResultTile from '../components/SearchResultTile';
 
 const SearchResultsScreen = () => {
@@ -15,11 +15,14 @@ const SearchResultsScreen = () => {
 
   const onChange = (query) => dispatch(setSearchTerm(query));
 
-  const { data, error, isLoading } = useSearchAllFoodQuery(searchTerm, { skip });
+  const { data, error, isLoading } = useSearchRecipesQuery(searchTerm, { skip });
+
   if (data) {
     dispatch(setSearchTermResults(data));
     dispatch(setSkip(true));
   }
+
+  if (error) console.log(error);
 
   const onSearchIconPress = () => {
     dispatch(setSkip(false));

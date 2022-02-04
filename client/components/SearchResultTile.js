@@ -33,7 +33,7 @@ const SearchResultTile = ({ item }) => {
             }}
           >
             <View style={styles.metaInfo}>
-              <Text style={styles.title}>{`${item.name.toUpperCase()} (${formatCategory(item.category).toUpperCase()})`}</Text>
+              <Text style={styles.title}>{`${item.title.toUpperCase()} (${formatCategory(item.category).toUpperCase()})`}</Text>
             </View>
           </TouchableOpacity>
           <Divider />
