@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
    },
    searchBar: {
-     borderRadius: 10
+     borderRadius: 10,
+     backgroundColor: '#F5F5F5',
+     shadowColor: '#FFFFFF',
    }
 });
