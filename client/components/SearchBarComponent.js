@@ -9,7 +9,7 @@ const SearchBarComponent = () => {
   return (
     <TouchableOpacity onPress={() => navigation.navigate('SearchResultsScreen')} style={styles.container}>
       <View pointerEvents="none">
-        <Searchbar placeholder="Search" />
+        <Searchbar placeholder="Search" style={styles.searchBar} />
       </View>
     </TouchableOpacity>
   );
@@ -18,5 +18,14 @@ const SearchBarComponent = () => {
 export default SearchBarComponent;
 
 const styles = StyleSheet.create({
-  container: { alignSelf: 'stretch', paddingHorizontal: 10 }
+  container: {
+    alignSelf: 'stretch',
+    paddingHorizontal: 40,
+    marginBottom: 15,
+   },
+   searchBar: {
+     borderRadius: 10,
+     backgroundColor: '#F5F5F5',
+     shadowColor: '#FFFFFF',
+   }
 });

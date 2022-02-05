@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar'
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useCallback } from 'react';
+import { Dimensions,
+  StyleSheet,
+  Text,
+  View,
+TouchableOpacity } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import Animated, {
   useSharedValue,
@@ -8,36 +11,42 @@ import Animated, {
   withTiming,
   useAnimatedProps,
 } from 'react-native-reanimated';
+import { ReText } from 'react-native-redash'
+import { useDispatch, useSelector } from 'react-redux';
+import selectGlasses from '../slices/waterSlice';
 
-const BACKGROUND_COLOR = '#444B6F';
-const BACKGROUND_STROKE_COLOR = '#303858';
-const STROKE_COLOR = '#A6E1FA'
+const BACKGROUND_COLOR = '#d4f1f9';
+const BACKGROUND_STROKE_COLOR = '#A6E1FA'
+const STROKE_COLOR = '#1c7fa6';
 
 const { width, height } = Dimensions.get('window');
 
-const CIRCLE_LENGTH = 1000;
+const CIRCLE_LENGTH = 850;
 const R = CIRCLE_LENGTH / (2 * Math.PI)
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle)
 
 const WaterTrackScreen = () => {
+  //const glasses  = useSelector(selectGlasses);
   const progress = useSharedValue(0);
 
-  useEffect(() => {
-    progress.value = withTiming(1, { duration: 2000});
-  }, []);
-
   const animatedProps = useAnimatedProps(() => ({
-    strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value)
+    strokeDashoffset: CIRCLE_LENGTH * (1 - 0.1 * progress.value)
   }));
 
   const progressText = useDerivedValue(() => {
-    return `${Math.floor(progress.value * 100)}`
+    return `${Math.floor(progress.value)}`
   })
+
+  const onPress = useCallback(() => {
+    // addGlass()
+    progress.value = withTiming(progress.value >= 10 ? 1 : progress.value + 1, { duration: 200});
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.progressText}>{progressText.value}</Text>
+      <Text>Glasses Of Water</Text>
+      <ReText style={styles.progressText} text={progressText}/>
       <Svg style={{position: 'absolute'}}>
         <Circle
         cx={width / 2}
@@ -57,7 +66,9 @@ const WaterTrackScreen = () => {
         strokeLinecap={'round'}
         />
       </Svg>
-      <StatusBar style='auto' />
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Text style={styles.buttonText}>Add Glass</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -72,8 +83,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   progressText: {
-    fontSize: 50,
-    color: '#A6E1FA',
+    fontSize: 70,
+    color: '#1c7fa6',
     fontWeight: 'bold',
+    width: 200,
+    textAlign: 'center'
+  },
+  button: {
+    position: 'absolute',
+    bottom: 80,
+    width: width * 0.6,
+    height: 60,
+    backgroundColor: '#1c7fa6',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 25,
+    color: 'white',
+    letterSpacing: 2.0,
+    fontFamily: 'Helvetica'
   }
 });

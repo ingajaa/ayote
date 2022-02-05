@@ -35,7 +35,7 @@ const SearchResultsScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
-        <Searchbar placeholder="Search" onIconPress={onSearchIconPress} onChangeText={onChange} value={searchTerm} />
+        <Searchbar style={styles.searchBar} placeholder="Search" onIconPress={onSearchIconPress} onChangeText={onChange} value={searchTerm} />
         <FlatList data={searchTermResults} renderItem={renderItem} keyExtractor={(item) => item.id} />
       </Layout>
     </SafeAreaView>
@@ -44,4 +44,9 @@ const SearchResultsScreen = () => {
 
 export default SearchResultsScreen;
 
-const styles = StyleSheet.create();
+const styles = StyleSheet.create({
+  searchBar: {
+    backgroundColor: '#F5F5F5',
+    shadowColor: '#FFFFFF',
+  }
+});

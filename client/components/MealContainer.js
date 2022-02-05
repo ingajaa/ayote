@@ -10,7 +10,7 @@ const MealContainer = () => {
       {data && data.length > 0 ? (
         data.map((meal) => (
           <View style={styles.mealContainerStyle} key={meal._id}>
-            <Text>{meal.foodName}</Text>
+            <Text style={styles.mealTitle}>{meal.foodName}</Text>
             <Text>Calories: {meal.totalCalories}</Text>
             <Text>Protein: {meal.totalProtein}</Text>
             <Text>Carbs: {meal.totalCarbs}</Text>
@@ -30,11 +30,14 @@ const styles = StyleSheet.create({
     borderColor: 'lightgrey',
     borderWidth: 1,
     marginVertical: 20,
-    paddingHorizontal: 78,
+    paddingHorizontal: 101,
     paddingVertical: 40,
     borderRadius: 5,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between'
+  },
+  mealTitle: {
+    fontWeight: 'bold',
   }
 });
 

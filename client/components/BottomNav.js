@@ -6,9 +6,9 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 
 const DropletIcon = (props) => <Icon {...props} name="droplet-outline" />;
 
-const BellIcon = (props) => <Icon {...props} name="bell-outline" />;
+const BellIcon = (props) => <Icon {...props} name="home-outline" />;
 
-const UserIcon = (props) => <Icon {...props} name="person-outline" />;
+const UserIcon = (props) => <Icon {...props} name="bell-outline" />;
 
 const BottomNav = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
