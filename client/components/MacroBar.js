@@ -5,7 +5,7 @@ const MacroBar = () => {
   return (
     <View style={styles.macroBarStyle}>
       <Text>Calories</Text>
-    <Text>Macros</Text>
+      <Text>Macros</Text>
     </View>
   );
 };
@@ -18,10 +18,10 @@ const styles = StyleSheet.create({
     borderColor: 'lightgrey',
     borderWidth: 1,
     marginVertical: 20,
-    paddingHorizontal: 128,
+    width: '85%',
     paddingVertical: 45,
     marginHorizontal: 20,
-    borderRadius: 5
-  },
-})
-
+    borderRadius: 10,
+    alignItems: 'center'
+  }
+});

@@ -4,7 +4,6 @@ import { useGetAllMealsQuery } from '../services/ayote';
 
 const MealContainer = () => {
   const { data, error, isLoading } = useGetAllMealsQuery();
-  if (data) console.log(data);
   return (
     <>
       {data && data.length > 0 ? (
@@ -29,15 +28,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderColor: 'lightgrey',
     borderWidth: 1,
-    marginVertical: 20,
-    paddingHorizontal: 101,
+    marginVertical: 10,
+    paddingHorizontal: 10,
     paddingVertical: 40,
-    borderRadius: 5,
+    borderRadius: 10,
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    width: '85%',
+    alignItems: 'center'
   },
   mealTitle: {
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   }
 });
 
