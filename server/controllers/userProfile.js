@@ -19,7 +19,5 @@ module.exports.addOne = async function addOne(req, res) {
 module.exports.updateOne = async function updateOne(req, res) {
   const { id } = await req.params;
   const body = await req.body;
-  console.log(id);
-  console.log(body);
   res.send(await UserProfile.findOneAndUpdate({ userId: id }, { $set: body }, { new: true }));
 };

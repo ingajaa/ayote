@@ -42,7 +42,6 @@ const SimpleFoodDetailsScreen = () => {
   const dispatch = useDispatch();
   const { data, error, isLoading } = useGetIngredientInformationQuery(currentItemId);
   if (data) {
-    console.log(data);
     dispatch(setId(data.id));
     dispatch(setName(data.name));
     dispatch(setCategory('recipes'));

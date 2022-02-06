@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -12,20 +12,23 @@ const BellIcon = (props) => <Icon {...props} name="home-outline" fill="#fe615a" 
 const UserIcon = (props) => <Icon {...props} name="bell-outline" fill="#fe615a" />;
 
 const BottomNav = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const navigation = useNavigation();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const routes = ['WaterTrackScreen', 'HomeScreen', 'HomeScreen'];
   return (
-    <View style={styles.navBar}>
-      <TouchableHighlight style={styles.touchableStyle} onPress={() => navigation.navigate('WaterTrackScreen')}>
-        <BottomNavigationTab icon={DropletIcon} />
-      </TouchableHighlight>
-      <TouchableHighlight style={styles.touchableStyle}>
-        <BottomNavigationTab icon={BellIcon} />
-      </TouchableHighlight>
-      <TouchableHighlight style={styles.touchableStyle}>
-        <BottomNavigationTab icon={UserIcon} />
-      </TouchableHighlight>
-    </View>
+    <BottomNavigation
+      style={styles.navBar}
+      appearance="noIndicator"
+      selectedIndex={selectedIndex}
+      onSelect={(index) => {
+        setSelectedIndex(index);
+        navigation.navigate(routes[index]);
+      }}
+    >
+      <BottomNavigationTab icon={DropletIcon} />
+      <BottomNavigationTab icon={BellIcon} />
+      <BottomNavigationTab icon={UserIcon} />
+    </BottomNavigation>
   );
 };
 

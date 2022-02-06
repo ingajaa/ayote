@@ -45,7 +45,6 @@ const RecipeDetailsScreen = () => {
 
   const { data, error, isLoading } = useGetRecipeInformationQuery(currentItemId);
   if (data) {
-    console.log(data);
     dispatch(setId(data.id));
     dispatch(setName(data.name));
     dispatch(setCategory('recipes'));
