@@ -19,44 +19,44 @@ const MacroBar = () => {
       dispatch(setDailyCaloriesGoal(targets.data[0].dailyCaloriesGoal));
     }
     if (meals.data && meals.data.length > 0) {
-      setConsumedCalories(aggregateConsumedCalories(meals.data));
-      setConsumedProtein(aggregateConsumedProtein(meals.data));
-      setConsumedCarbs(aggregateConsumedCarbs(meals.data));
-      setConsumedFat(aggregateConsumedFat(meals.data));
+      setConsumedCalories(aggregateConsumedCalories(meals.data)?.totalCalories);
+      setConsumedProtein(aggregateConsumedProtein(meals.data)?.totalProtein);
+      setConsumedCarbs(aggregateConsumedCarbs(meals.data)?.totalCarbs);
+      setConsumedFat(aggregateConsumedFat(meals.data)?.totalFat);
     }
   }, [targets.data, meals.data]);
 
   const dailyCaloriesGoal = useSelector(selectDailyCaloriesGoal);
 
   const aggregateConsumedCalories = (meals) => {
-    if (!meals.length) return 0;
-    if (meals.length === 1) return meals[0].totalCalories;
+    if (!meals.length) return { totalCalories: 0 };
+    if (meals.length === 1) return { totalCalories: meals[0].totalCalories };
     return meals.reduce((a, b) => {
-      return +((a.totalCalories * 100 + b.totalCalories * 100) / 100).toFixed(0);
+      return { totalCalories: +((a.totalCalories * 100 + b.totalCalories * 100) / 100).toFixed(0) };
     });
   };
 
   const aggregateConsumedProtein = (meals) => {
-    if (!meals.length) return 0;
-    if (meals.length === 1) return meals[0].totalProtein;
+    if (!meals.length) return { totalProtein: 0 };
+    if (meals.length === 1) return { totalProtein: meals[0].totalProtein };
     return meals.reduce((a, b) => {
-      return +((a.totalProtein * 100 + b.totalProtein * 100) / 100).toFixed(0);
+      return { totalProtein: +((a.totalProtein * 100 + b.totalProtein * 100) / 100).toFixed(0) };
     });
   };
 
   const aggregateConsumedCarbs = (meals) => {
-    if (!meals.length) return 0;
-    if (meals.length === 1) return meals[0].totalCarbs;
+    if (!meals.length) return { totalCarbs: 0 };
+    if (meals.length === 1) return { totalCarbs: meals[0].totalCarbs };
     return meals.reduce((a, b) => {
-      return +((a.totalCarbs * 100 + b.totalCarbs * 100) / 100).toFixed(0);
+      return { totalCarbs: +((a.totalCarbs * 100 + b.totalCarbs * 100) / 100).toFixed(0) };
     });
   };
 
   const aggregateConsumedFat = (meals) => {
-    if (!meals.length) return 0;
-    if (meals.length === 1) return meals[0].totalFat;
+    if (!meals.length) return { totalFat: 0 };
+    if (meals.length === 1) return { totalFat: meals[0].totalFat };
     return meals.reduce((a, b) => {
-      return +((a.totalFat * 100 + b.totalFat * 100) / 100).toFixed(0);
+      return { totalFat: +((a.totalFat * 100 + b.totalFat * 100) / 100).toFixed(0) };
     });
   };
 
