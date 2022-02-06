@@ -29,24 +29,32 @@ const MacroBar = () => {
   const dailyCaloriesGoal = useSelector(selectDailyCaloriesGoal);
 
   const aggregateConsumedCalories = (meals) => {
+    if (!meals.length) return 0;
+    if (meals.length === 1) return meals[0].totalCalories;
     return meals.reduce((a, b) => {
       return +((a.totalCalories * 100 + b.totalCalories * 100) / 100).toFixed(0);
     });
   };
 
   const aggregateConsumedProtein = (meals) => {
+    if (!meals.length) return 0;
+    if (meals.length === 1) return meals[0].totalProtein;
     return meals.reduce((a, b) => {
       return +((a.totalProtein * 100 + b.totalProtein * 100) / 100).toFixed(0);
     });
   };
 
   const aggregateConsumedCarbs = (meals) => {
+    if (!meals.length) return 0;
+    if (meals.length === 1) return meals[0].totalCarbs;
     return meals.reduce((a, b) => {
       return +((a.totalCarbs * 100 + b.totalCarbs * 100) / 100).toFixed(0);
     });
   };
 
   const aggregateConsumedFat = (meals) => {
+    if (!meals.length) return 0;
+    if (meals.length === 1) return meals[0].totalFat;
     return meals.reduce((a, b) => {
       return +((a.totalFat * 100 + b.totalFat * 100) / 100).toFixed(0);
     });
