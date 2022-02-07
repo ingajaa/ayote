@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
+import { ProgressBar, Colors } from 'react-native-paper';
 import { useGetUserProfileQuery } from '../services/ayote';
 import { selectDailyCaloriesGoal, setDailyCaloriesGoal } from '../slices/userProfileSlice';
 import { useGetAllMealsQuery } from '../services/ayote';
@@ -62,10 +63,15 @@ const MacroBar = () => {
 
   return (
     <View style={styles.macroBarStyle}>
-      <Text>
-        Calories: {consumedCalories}/{dailyCaloriesGoal}
-      </Text>
-      <Text>{`Protein: ${consumedProtein}  Carbs: ${consumedcarbs} Fat: ${consumedFat}`}</Text>
+      <View style={styles.summarySection}>
+        <Text>
+          Calories ({consumedCalories}/{dailyCaloriesGoal} Kcal)
+        </Text>
+        <ProgressBar progress={consumedCalories && dailyCaloriesGoal ? +((consumedCalories * 100) / (dailyCaloriesGoal * 100)).toFixed(2) : 0} color={'#FFBF00'} style={styles.caloriesProgressBar} />
+      </View>
+      <View style={styles.summarySection}>
+        <Text>{`Protein: ${consumedProtein}  Carbs: ${consumedcarbs} Fat: ${consumedFat}`}</Text>
+      </View>
     </View>
   );
 };
@@ -79,9 +85,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginVertical: 20,
     width: '85%',
-    paddingVertical: 45,
+    paddingVertical: 10,
     marginHorizontal: 20,
     borderRadius: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    textAlign: 'left'
+  },
+  summarySection: {
+    marginVertical: 5
+  },
+  caloriesProgressBar: {
+    height: 15,
+    width: 300,
+    marginVertical: 5
   }
 });
