@@ -93,15 +93,15 @@ const UserProfileScreen = () => {
         <Text style={styles.text} category="label">
           DAILY CARBS TARGET
         </Text>
-        <Input style={styles.input} placeholder="Enter amount of Carbs" value={'' + dailyCarbsGoal} onChangeText={(value) => onChange(value, 'carbs')} />
+        <Input style={styles.input} placeholder="Enter amount of carbs" value={'' + dailyCarbsGoal} onChangeText={(value) => onChange(value, 'carbs')} />
         <Text style={styles.text} category="label">
-          DAILY CARBS TARGET
+          DAILY FAT TARGET
         </Text>
-        <Input style={styles.input} placeholder="Enter amount of Fat" value={'' + dailyFatGoal} onChangeText={(value) => onChange(value, 'fat')} />
+        <Input style={styles.input} placeholder="Enter amount of fat" value={'' + dailyFatGoal} onChangeText={(value) => onChange(value, 'fat')} />
         <Text style={styles.text} category="label">
           DAILY CAFFEINE CAP
         </Text>
-        <Input style={styles.input} placeholder="Enter amount of Caffeine" value={'' + dailyCaffeineCountGoal} onChangeText={(value) => onChange(value, 'caffeine')} />
+        <Input style={styles.input} placeholder="Enter amount of caffeine" value={'' + dailyCaffeineCountGoal} onChangeText={(value) => onChange(value, 'caffeine')} />
         <Button style={styles.submit} size="medium" onPress={onPress}>
           UPDATE
         </Button>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginBottom: 20,
-    marginTop: 20
+    marginTop: 20,
   },
   submit: {
     marginTop: 20,
