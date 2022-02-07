@@ -39,7 +39,13 @@ const MealContainer = () => {
             >
               SEARCH ITEM
             </Button>
-            <Button style={styles.modalButton} onPress={() => setVisible(false)}>
+            <Button
+              style={styles.modalButton}
+              onPress={() => {
+                setVisible(false);
+                navigation.navigate('TrackCustomMealScreen');
+              }}
+            >
               ADD CUSTOM MEAL
             </Button>
             <Button style={styles.modalButton} onPress={() => setVisible(false)}>

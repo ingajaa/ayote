@@ -19,6 +19,7 @@ import RecipeDetailsScreen from './screens/RecipeDetailsScreen';
 import WaterTrackScreen from './screens/WaterTrackScreen';
 import TrackFoodScreen from './screens/TrackFoodScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
+import TrackCustomMealScreen from './screens/TrackCustomMealScreen';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -37,6 +38,7 @@ export default function App() {
               <Stack.Screen name="WaterTrackScreen" component={WaterTrackScreen} options={{ headerShown: false }} />
               <Stack.Screen name="TrackFoodScreen" component={TrackFoodScreen} options={{ headerShown: false }} />
               <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="TrackCustomMealScreen" component={TrackCustomMealScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
           </SafeAreaProvider>
         </NavigationContainer>
