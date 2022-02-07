@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
   caloriesProgressBar: {
     height: 15,
     width: 300,
-    marginVertical: 5
+    marginVertical: 5,
+    borderRadius: 6
   }
 });
