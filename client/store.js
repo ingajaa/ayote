@@ -3,6 +3,7 @@ import searchReducer from './slices/searchSlice';
 import currentItemReducer from './slices/currentItemSlice';
 import waterReducer from './slices/waterSlice';
 import userProfileReducer from './slices/userProfileSlice';
+import customMealReducer from './slices/customMealSlice';
 import { spoonacularApi } from './services/spoonacular';
 import { ayoteApi } from './services/ayote';
 import { setupListeners } from '@reduxjs/toolkit/query';
@@ -14,6 +15,7 @@ export const store = configureStore({
     currentItem: currentItemReducer,
     water: waterReducer,
     userProfile: userProfileReducer,
+    customMeal: customMealReducer,
 
     // Services
     [spoonacularApi.reducerPath]: spoonacularApi.reducer,
