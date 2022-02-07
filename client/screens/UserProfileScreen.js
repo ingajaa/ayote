@@ -4,7 +4,19 @@ import { Layout, Text, Button, Input, Divider, View } from '@ui-kitten/component
 import BackTopNav from '../components/BackTopNav';
 import { useGetUserProfileQuery, useUpdateProfileMutation } from '../services/ayote';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectUserId, selectDailyCaloriesGoal, setDailyCaloriesGoal, selectDailyGlassCountGoal, setDailyGlassCountGoal } from '../slices/userProfileSlice';
+import {
+  selectUserId,
+  selectDailyCaloriesGoal,
+  setDailyCaloriesGoal,
+  selectDailyGlassCountGoal,
+  setDailyGlassCountGoal,
+  selectDailyProteinGoal,
+  setDailyProteinGoal,
+  selectDailyCarbsGoal,
+  setDailyCarbsGoal,
+  selectDailyFatGoal,
+  setDailyFatGoal
+ } from '../slices/userProfileSlice';
 import { useNavigation } from '@react-navigation/native';
 
 const UserProfileScreen = () => {
@@ -13,6 +25,9 @@ const UserProfileScreen = () => {
   const userId = useSelector(selectUserId); // TODO: get value from auth / dynamically
   const dailyCaloriesGoal = useSelector(selectDailyCaloriesGoal);
   const dailyGlassCountGoal = useSelector(selectDailyGlassCountGoal);
+  const dailyProteinGoal = useSelector(selectDailyProteinGoal);
+  const dailyCarbsGoal = useSelector(selectDailyCarbsGoal);
+  const dailyFatGoal = useSelector(selectDailyFatGoal);
   const dispatch = useDispatch();
 
   // Get latest goal values
@@ -20,6 +35,9 @@ const UserProfileScreen = () => {
   if (data && data.length > 0) {
     dispatch(setDailyCaloriesGoal(data[0].dailyCaloriesGoal));
     dispatch(setDailyGlassCountGoal(data[0].dailyGlassCountGoal));
+    dispatch(setDailyProteinGoal(data[0].dailyProteinGoal));
+    dispatch(setDailyCarbsGoal(data[0].dailyCarbsGoal));
+    dispatch(setDailyFatGoal(data[0].dailyFatGoal));
     setSkip(true);
   }
 
@@ -28,6 +46,9 @@ const UserProfileScreen = () => {
   const onChange = (value, input) => {
     if (input === 'calories') dispatch(setDailyCaloriesGoal(value));
     if (input === 'glasses') dispatch(setDailyGlassCountGoal(value));
+    if (input === 'protein') dispatch(setDailyProteinGoal(value));
+    if (input === 'carbs') dispatch(setDailyCarbsGoal(value));
+    if (input === 'fat') dispatch(setDailyFatGoal(value));
   };
 
   useEffect(() => {
@@ -38,7 +59,10 @@ const UserProfileScreen = () => {
     const body = {
       id: 1,
       dailyCaloriesGoal: Number(dailyCaloriesGoal),
-      dailyGlassCountGoal: Number(dailyGlassCountGoal)
+      dailyGlassCountGoal: Number(dailyGlassCountGoal),
+      dailyProteinGoal: Number(dailyProteinGoal),
+      dailyCarbsGoal: Number(dailyCarbsGoal),
+      dailyFatGoal: Number(dailyFatGoal),
     };
     updateProfile(body);
     navigation.navigate('HomeScreen');
@@ -56,6 +80,18 @@ const UserProfileScreen = () => {
           DAILY WATER GLASSES TARGET
         </Text>
         <Input style={styles.input} placeholder="Enter amount of glasses" value={'' + dailyGlassCountGoal} onChangeText={(value) => onChange(value, 'glasses')} />
+        <Text style={styles.text} category="label">
+          DAILY PROTEIN TARGET
+        </Text>
+        <Input style={styles.input} placeholder="Enter amount of protein" value={'' + dailyProteinGoal} onChangeText={(value) => onChange(value, 'protein')} />
+        <Text style={styles.text} category="label">
+          DAILY CARBS TARGET
+        </Text>
+        <Input style={styles.input} placeholder="Enter amount of Carbs" value={'' + dailyCarbsGoal} onChangeText={(value) => onChange(value, 'carbs')} />
+        <Text style={styles.text} category="label">
+          DAILY CARBS TARGET
+        </Text>
+        <Input style={styles.input} placeholder="Enter amount of Fat" value={'' + dailyFatGoal} onChangeText={(value) => onChange(value, 'fat')} />
         <Button style={styles.submit} size="medium" onPress={onPress}>
           UPDATE
         </Button>
