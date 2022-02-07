@@ -5,6 +5,7 @@ import { ProgressBar, Colors } from 'react-native-paper';
 import { useGetUserProfileQuery } from '../services/ayote';
 import { selectDailyCaloriesGoal, setDailyCaloriesGoal } from '../slices/userProfileSlice';
 import { useGetAllMealsQuery } from '../services/ayote';
+import CircularProgress from 'react-native-circular-progress-indicator';
 
 const MacroBar = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const MacroBar = () => {
   const meals = useGetAllMealsQuery(1);
   const [consumedCalories, setConsumedCalories] = useState(0);
   const [consumedProtein, setConsumedProtein] = useState(0);
-  const [consumedcarbs, setConsumedCarbs] = useState(0);
+  const [consumedCarbs, setConsumedCarbs] = useState(0);
   const [consumedFat, setConsumedFat] = useState(0);
 
   useEffect(() => {
@@ -70,7 +71,42 @@ const MacroBar = () => {
         <ProgressBar progress={consumedCalories && dailyCaloriesGoal ? +((consumedCalories * 100) / (dailyCaloriesGoal * 100)).toFixed(2) : 0} color={'#FFBF00'} style={styles.caloriesProgressBar} />
       </View>
       <View style={styles.summarySection}>
-        <Text style={styles.summarySectionText}>{`Protein: ${consumedProtein}  Carbs: ${consumedcarbs} Fat: ${consumedFat}`}</Text>
+        <Text style={styles.summarySectionText}>{`Protein: ${consumedProtein}  Carbs: ${consumedCarbs} Fat: ${consumedFat}`}</Text>
+      </View>
+      <View styles={styles.macrosSection}>
+        <CircularProgress
+          value={consumedProtein ? consumedProtein : 0}
+          radius={25}
+          maxValue={100}
+          activeStrokeColor={'#355c7d'}
+          inActiveStrokeColor={'#9b59b6'}
+          inActiveStrokeOpacity={0.2}
+          fontSize={12}
+          activeStrokeWidth={6}
+          inActiveStrokeWidth={6}
+        />
+        <CircularProgress
+          value={consumedCarbs ? consumedCarbs : 0}
+          radius={25}
+          maxValue={100}
+          activeStrokeColor={'#c06c84'}
+          inActiveStrokeColor={'#9b59b6'}
+          inActiveStrokeOpacity={0.2}
+          fontSize={12}
+          activeStrokeWidth={6}
+          inActiveStrokeWidth={6}
+        />
+        <CircularProgress
+          value={consumedFat ? consumedFat : 0}
+          radius={25}
+          maxValue={100}
+          activeStrokeColor={'#f67280'}
+          inActiveStrokeColor={'#9b59b6'}
+          inActiveStrokeOpacity={0.2}
+          fontSize={12}
+          activeStrokeWidth={6}
+          inActiveStrokeWidth={6}
+        />
       </View>
     </View>
   );
@@ -102,5 +138,10 @@ const styles = StyleSheet.create({
   },
   summarySectionText: {
     color: '#333432'
+  },
+  macrosSection: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 });
