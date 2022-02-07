@@ -5,6 +5,7 @@ import { Text, Button, Card, Modal, useTheme } from '@ui-kitten/components';
 import { useGetAllMealsQuery } from '../services/ayote';
 import { useDeleteMealMutation } from '../services/ayote';
 import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const MealContainer = () => {
   const theme = useTheme();
@@ -38,13 +39,18 @@ const MealContainer = () => {
   const renderItem = ({ item }) => {
     return (
       <Swipeable renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item._id)}>
-        <View style={styles.mealContainerStyle} key={item._id}>
+        <LinearGradient
+          // Button Linear Gradient
+          colors={['#D16BA5', '#86A8E7', '#5FFBF1']}
+          style={styles.mealContainerStyle}
+          key={item._id}
+        >
           <Text style={styles.mealTitle}>{item.foodName}</Text>
-          <Text>Calories: {item.totalCalories}</Text>
-          <Text>Protein: {item.totalProtein}</Text>
-          <Text>Carbs: {item.totalCarbs}</Text>
-          <Text>Fat: {item.totalFat}</Text>
-        </View>
+          <Text style={styles.macros}>Calories: {item.totalCalories}</Text>
+          <Text style={styles.macros}>Protein: {item.totalProtein}</Text>
+          <Text style={styles.macros}>Carbs: {item.totalCarbs}</Text>
+          <Text style={styles.macros}>Fat: {item.totalFat}</Text>
+        </LinearGradient>
       </Swipeable>
     );
   };
@@ -84,14 +90,20 @@ const MealContainer = () => {
           </Card>
         </Modal>
       </View>
-      {data && data.length > 0 ? <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item._id} /> : <Text style={styles.text}>You are not tracking any meal..</Text>}
+      {data && data.length > 0 ? (
+        <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item._id} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} />
+      ) : (
+        <Text style={styles.text}>You are not tracking any meal..</Text>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: '85%'
+    flex: 1,
+    width: '85%',
+    marginBottom: 60
   },
   header: {
     flexDirection: 'row',
@@ -106,9 +118,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   mealContainerStyle: {
-    backgroundColor: '#fff',
-    borderColor: 'lightgrey',
-    borderWidth: 1,
+    borderWidth: 0,
     marginVertical: 10,
     paddingVertical: 20,
     borderRadius: 10,
@@ -117,7 +127,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   mealTitle: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: '#fff'
+  },
+  macros: {
+    color: '#fff'
   },
   text: {
     color: '#fff',
