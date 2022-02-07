@@ -13,14 +13,6 @@ import { useDispatch } from 'react-redux';
 import { setUserId, setDailyCaloriesGoal, setDailyGlassCountGoal } from '../slices/userProfileSlice';
 
 const HomeScreen = () => {
-  // const dispatch = useDispatch();
-  // const { data, error, refetch, isLoading } = useGetUserProfileQuery(1);
-  // if (data && data.length > 0) {
-  //   dispatch(setUserId(data[0].userId));
-  //   dispatch(setDailyCaloriesGoal(data[0].dailyCaloriesGoal));
-  //   dispatch(setDailyGlassCountGoal(data[0].dailyGlassCountGoal));
-  // }
-
   return (
     <Fragment>
       <SafeAreaView style={{ flex: 0, backgroundColor: '#fe615a' }} />
