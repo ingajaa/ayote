@@ -64,13 +64,13 @@ const MacroBar = () => {
   return (
     <View style={styles.macroBarStyle}>
       <View style={styles.summarySection}>
-        <Text>
+        <Text style={styles.summarySectionText}>
           Calories ({consumedCalories}/{dailyCaloriesGoal} Kcal)
         </Text>
         <ProgressBar progress={consumedCalories && dailyCaloriesGoal ? +((consumedCalories * 100) / (dailyCaloriesGoal * 100)).toFixed(2) : 0} color={'#FFBF00'} style={styles.caloriesProgressBar} />
       </View>
       <View style={styles.summarySection}>
-        <Text>{`Protein: ${consumedProtein}  Carbs: ${consumedcarbs} Fat: ${consumedFat}`}</Text>
+        <Text style={styles.summarySectionText}>{`Protein: ${consumedProtein}  Carbs: ${consumedcarbs} Fat: ${consumedFat}`}</Text>
       </View>
     </View>
   );
@@ -99,5 +99,8 @@ const styles = StyleSheet.create({
     width: 300,
     marginVertical: 5,
     borderRadius: 6
+  },
+  summarySectionText: {
+    color: '#333432'
   }
 });
