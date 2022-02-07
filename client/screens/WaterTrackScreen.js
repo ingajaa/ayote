@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonText: {
-    fontSize: 22,
+    fontSize: 20,
     color: 'white',
     letterSpacing: 2.0,
     fontFamily: 'Helvetica'
