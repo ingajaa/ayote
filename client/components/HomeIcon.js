@@ -16,5 +16,7 @@ const styles = StyleSheet.create({
   icon: {
     width: 32,
     height: 32,
+    borderColor: 'blue',
+    borderWidth: 1,
   },
 });
