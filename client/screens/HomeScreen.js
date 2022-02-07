@@ -26,9 +26,7 @@ const HomeScreen = () => {
       <SafeAreaView style={{ flex: 0, backgroundColor: '#fe615a' }} />
       <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         <Layout style={styles.Layout}>
-          {/* TopNav affecting other components' rendering on actual iPhone */}
           <TopNav />
-          {/* <LogoComponent /> */}
           <SearchBarComponent />
           <MacroBar />
           <MealContainer />
