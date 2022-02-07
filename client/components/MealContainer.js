@@ -39,12 +39,7 @@ const MealContainer = () => {
   const renderItem = ({ item }) => {
     return (
       <Swipeable renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item._id)}>
-        <LinearGradient
-          // Button Linear Gradient
-          colors={['#D16BA5', '#86A8E7', '#5FFBF1']}
-          style={styles.mealContainerStyle}
-          key={item._id}
-        >
+        <LinearGradient colors={['#D16BA5', '#86A8E7', '#5FFBF1']} style={styles.mealContainerStyle} key={item._id}>
           <Text style={styles.mealTitle}>{item.foodName}</Text>
           <Text style={styles.macros}>Calories: {item.totalCalories}</Text>
           <Text style={styles.macros}>Protein: {item.totalProtein}</Text>
@@ -84,7 +79,13 @@ const MealContainer = () => {
             >
               ADD CUSTOM MEAL
             </Button>
-            <Button style={styles.modalButton} onPress={() => setVisible(false)}>
+            <Button
+              style={styles.modalButton}
+              onPress={() => {
+                setVisible(false);
+                navigation.navigate('BarcodeScannerScreen');
+              }}
+            >
               SCAN BARCODE
             </Button>
           </Card>
