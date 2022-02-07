@@ -19,13 +19,10 @@ export default SearchBarComponent;
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'stretch',
-    paddingHorizontal: 40,
-    marginBottom: 15,
-   },
-   searchBar: {
-     borderRadius: 10,
-     backgroundColor: '#F5F5F5',
-     shadowColor: '#FFFFFF',
-   }
+    width: '85%',
+    marginBottom: 15
+  },
+  searchBar: {
+    borderRadius: 10
+  }
 });

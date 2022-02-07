@@ -2,16 +2,20 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './slices/searchSlice';
 import currentItemReducer from './slices/currentItemSlice';
 import waterReducer from './slices/waterSlice';
+import userProfileReducer from './slices/userProfileSlice';
 import { spoonacularApi } from './services/spoonacular';
 import { ayoteApi } from './services/ayote';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 export const store = configureStore({
   reducer: {
+    // State Slices
     search: searchReducer,
     currentItem: currentItemReducer,
     water: waterReducer,
-    // Add the generated reducer as a specific top-level slice
+    userProfile: userProfileReducer,
+
+    // Services
     [spoonacularApi.reducerPath]: spoonacularApi.reducer,
     [ayoteApi.reducerPath]: ayoteApi.reducer
   },

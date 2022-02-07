@@ -7,7 +7,7 @@ export const ayoteApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: AYOTE_API_BASE_URL
   }),
-  tagTypes: ['Meal'],
+  tagTypes: ['Meal', 'Profile'],
   endpoints: (builder) => ({
     getAllMeals: builder.query({
       query: () => `/meals`,
@@ -20,10 +20,22 @@ export const ayoteApi = createApi({
         body
       }),
       invalidatesTags: ['Meal']
+    }),
+    getUserProfile: builder.query({
+      query: (id) => `/profiles/${id}`,
+      providesTags: ['Profile']
+    }),
+    updateProfile: builder.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `/profiles/${id}`,
+        method: 'PATCH',
+        body: patch
+      }),
+      invalidatesTags: ['Profile']
     })
   })
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllMealsQuery, useAddMealMutation } = ayoteApi;
+export const { useGetAllMealsQuery, useAddMealMutation, useGetUserProfileQuery, useUpdateProfileMutation } = ayoteApi;

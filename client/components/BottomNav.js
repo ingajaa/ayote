@@ -1,30 +1,34 @@
 import { StyleSheet, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
+import { LinearGradient } from 'expo-linear-gradient';
 
-const DropletIcon = (props) => <Icon {...props} name="droplet-outline" />;
+const DropletIcon = (props) => <Icon {...props} name="droplet-outline" fill="#fe615a" />;
 
-const BellIcon = (props) => <Icon {...props} name="home-outline" />;
+const BellIcon = (props) => <Icon {...props} name="home-outline" fill="#fe615a" />;
 
-const UserIcon = (props) => <Icon {...props} name="bell-outline" />;
+const UserIcon = (props) => <Icon {...props} name="bell-outline" fill="#fe615a" />;
 
 const BottomNav = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const navigation = useNavigation();
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const routes = ['WaterTrackScreen', 'HomeScreen', 'HomeScreen'];
   return (
-    <View style={styles.navBar}>
-          <TouchableHighlight style={styles.touchableStyle} onPress={() => navigation.navigate('WaterTrackScreen')}>
+    <BottomNavigation
+      style={styles.navBar}
+      appearance="noIndicator"
+      selectedIndex={selectedIndex}
+      onSelect={(index) => {
+        setSelectedIndex(index);
+        navigation.navigate(routes[index]);
+      }}
+    >
       <BottomNavigationTab icon={DropletIcon} />
-      </TouchableHighlight>
-      <TouchableHighlight style={styles.touchableStyle}>
       <BottomNavigationTab icon={BellIcon} />
-      </TouchableHighlight>
-      <TouchableHighlight style={styles.touchableStyle}>
       <BottomNavigationTab icon={UserIcon} />
-      </TouchableHighlight>
-    </View>
+    </BottomNavigation>
   );
 };
 
@@ -36,12 +40,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'space-around',
     bottom: 0,
-    paddingTop: 15,
-    paddingBottom: 15,
-    flexDirection: 'row'
+    paddingTop: 30,
+    paddingBottom: 5,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30
   },
   touchableStyle: {
-    paddingHorizontal: 25,
+    paddingHorizontal: 25
   }
 });
 

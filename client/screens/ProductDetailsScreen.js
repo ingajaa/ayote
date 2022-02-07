@@ -40,10 +40,8 @@ const Footer = (props) => (
 const ProductDetailsScreen = () => {
   const currentItemId = useSelector(selectId);
   const dispatch = useDispatch();
-  console.log(currentItemId);
   const { data, error, isLoading } = useGetProductInformationQuery(currentItemId);
   if (data) {
-    console.log(data);
     dispatch(setId(data.id));
     dispatch(setName(data.name));
     dispatch(setCategory('recipes'));
