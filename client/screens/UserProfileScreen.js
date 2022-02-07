@@ -15,7 +15,9 @@ import {
   selectDailyCarbsGoal,
   setDailyCarbsGoal,
   selectDailyFatGoal,
-  setDailyFatGoal
+  setDailyFatGoal,
+  selectDailyCaffeineCountGoal,
+  setDailyCaffeineCountGoal,
  } from '../slices/userProfileSlice';
 import { useNavigation } from '@react-navigation/native';
 
@@ -28,6 +30,7 @@ const UserProfileScreen = () => {
   const dailyProteinGoal = useSelector(selectDailyProteinGoal);
   const dailyCarbsGoal = useSelector(selectDailyCarbsGoal);
   const dailyFatGoal = useSelector(selectDailyFatGoal);
+  const dailyCaffeineCountGoal = useSelector(selectDailyCaffeineCountGoal);
   const dispatch = useDispatch();
 
   // Get latest goal values
@@ -38,6 +41,7 @@ const UserProfileScreen = () => {
     dispatch(setDailyProteinGoal(data[0].dailyProteinGoal));
     dispatch(setDailyCarbsGoal(data[0].dailyCarbsGoal));
     dispatch(setDailyFatGoal(data[0].dailyFatGoal));
+    dispatch(setDailyCaffeineCountGoal(data[0].dailyCaffeineCountGoal));
     setSkip(true);
   }
 
@@ -49,6 +53,7 @@ const UserProfileScreen = () => {
     if (input === 'protein') dispatch(setDailyProteinGoal(value));
     if (input === 'carbs') dispatch(setDailyCarbsGoal(value));
     if (input === 'fat') dispatch(setDailyFatGoal(value));
+    if (input === 'caffeine') dispatch(setDailyCaffeineCountGoal(value));
   };
 
   useEffect(() => {
@@ -63,6 +68,7 @@ const UserProfileScreen = () => {
       dailyProteinGoal: Number(dailyProteinGoal),
       dailyCarbsGoal: Number(dailyCarbsGoal),
       dailyFatGoal: Number(dailyFatGoal),
+      dailyCaffeineCountGoal: Number(dailyCaffeineCountGoal),
     };
     updateProfile(body);
     navigation.navigate('HomeScreen');
@@ -92,6 +98,10 @@ const UserProfileScreen = () => {
           DAILY CARBS TARGET
         </Text>
         <Input style={styles.input} placeholder="Enter amount of Fat" value={'' + dailyFatGoal} onChangeText={(value) => onChange(value, 'fat')} />
+        <Text style={styles.text} category="label">
+          DAILY CAFFEINE CAP
+        </Text>
+        <Input style={styles.input} placeholder="Enter amount of Caffeine" value={'' + dailyCaffeineCountGoal} onChangeText={(value) => onChange(value, 'caffeine')} />
         <Button style={styles.submit} size="medium" onPress={onPress}>
           UPDATE
         </Button>

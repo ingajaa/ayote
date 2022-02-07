@@ -38,7 +38,14 @@ export const waterSlice = createSlice({
   }
 });
 
-export const { setUserId, setDailyCaloriesGoal, setDailyGlassCountGoal, setDailyCaffeineCountGoal, setDailyProteinGoal, setDailyCarbsGoal, setDailyFatGoal } = waterSlice.actions;
+export const {
+  setUserId,
+  setDailyCaloriesGoal,
+  setDailyGlassCountGoal,
+  setDailyCaffeineCountGoal,
+  setDailyProteinGoal,
+  setDailyCarbsGoal,
+  setDailyFatGoal } = waterSlice.actions;
 
 export const selectUserId = (state) => {
   return state.userProfile.userId;
