@@ -1,24 +1,54 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
-import { Text, Button, Card, Modal } from '@ui-kitten/components';
+import { Animated, View, StyleSheet, FlatList } from 'react-native';
+import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler';
+import { Text, Button, Card, Modal, useTheme } from '@ui-kitten/components';
 import { useGetAllMealsQuery } from '../services/ayote';
+import { useDeleteMealMutation } from '../services/ayote';
 import { useNavigation } from '@react-navigation/native';
 
 const MealContainer = () => {
+  const theme = useTheme();
   const navigation = useNavigation();
   const { data, error, isLoading } = useGetAllMealsQuery();
+  const [deleteMeal, results] = useDeleteMealMutation();
   const [visible, setVisible] = React.useState(false);
-  const renderItem = ({ item }) => {
+
+  const onSwipePress = async (itemId) => {
+    await deleteMeal(itemId);
+  };
+
+  const renderRightActions = (progress, dragX, itemId) => {
+    const opacity = dragX.interpolate({
+      inputRange: [-150, 0],
+      outputRange: [1, 0],
+      extrapolate: 'clamp'
+    });
+
     return (
-      <View style={styles.mealContainerStyle} key={item._id}>
-        <Text style={styles.mealTitle}>{item.foodName}</Text>
-        <Text>Calories: {item.totalCalories}</Text>
-        <Text>Protein: {item.totalProtein}</Text>
-        <Text>Carbs: {item.totalCarbs}</Text>
-        <Text>Fat: {item.totalFat}</Text>
+      <View style={[styles.swipedRow]}>
+        <TouchableOpacity style={styles.deleteButton} onPress={() => onSwipePress(itemId)}>
+          <Animated.View>
+            <Text style={styles.deleteButtonText}>Confirm Deletion</Text>
+          </Animated.View>
+        </TouchableOpacity>
       </View>
     );
   };
+
+  const renderItem = ({ item }) => {
+    return (
+      <Swipeable renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item._id)}>
+        <View style={styles.mealContainerStyle} key={item._id}>
+          <Text style={styles.mealTitle}>{item.foodName}</Text>
+          <Text>Calories: {item.totalCalories}</Text>
+          <Text>Protein: {item.totalProtein}</Text>
+          <Text>Carbs: {item.totalCarbs}</Text>
+          <Text>Fat: {item.totalFat}</Text>
+        </View>
+      </Swipeable>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -100,6 +130,33 @@ const styles = StyleSheet.create({
   },
   backdrop: {
     backgroundColor: 'rgba(0, 0, 0, 0.5)'
+  },
+  swipedRow: {
+    width: '100%',
+    backgroundColor: '#FF3D71',
+    marginVertical: 10,
+    borderRadius: 10,
+    flexDirection: 'column',
+    padding: 10
+  },
+  swipedConfirmationContainer: {
+    flex: 1
+  },
+  deleteConfirmationText: {
+    color: '#fcfcfc',
+    fontWeight: 'bold'
+  },
+  deleteButton: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
+    width: '100%'
+  },
+  deleteButtonText: {
+    textAlign: 'center',
+    color: '#fff',
+    fontWeight: 'bold',
+    padding: 3
   }
 });
 

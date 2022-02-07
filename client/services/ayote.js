@@ -21,6 +21,13 @@ export const ayoteApi = createApi({
       }),
       invalidatesTags: ['Meal']
     }),
+    deleteMeal: builder.mutation({
+      query: (id) => ({
+        url: `/meals/${id}`,
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Meal']
+    }),
     getUserProfile: builder.query({
       query: (id) => `/profiles/${id}`,
       providesTags: ['Profile']
@@ -38,4 +45,4 @@ export const ayoteApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllMealsQuery, useAddMealMutation, useGetUserProfileQuery, useUpdateProfileMutation } = ayoteApi;
+export const { useGetAllMealsQuery, useAddMealMutation, useDeleteMealMutation, useGetUserProfileQuery, useUpdateProfileMutation } = ayoteApi;
