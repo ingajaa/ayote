@@ -59,11 +59,11 @@ const WaterTrackScreen = () => {
     <SafeAreaView style={styles.safeArea}>
       <BackTopNav backgroundColor={BACKGROUND_COLOR} iconFill={ICON_FILL} />
       <View style={styles.container}>
-        <Text>Glasses Of Water</Text>
+        <Text style={styles.glassesOfWaterText}>Glasses Of Water</Text>
         <ReText style={styles.progressText} text={progressText} />
-        <Svg style={{ position: 'absolute' }}>
+        <Svg style={styles.svg}>
           <Circle cx={width / 2} cy={height / 2} r={R} stroke={BACKGROUND_STROKE_COLOR} strokeWidth={30} />
-          <AnimatedCircle cx={width / 2} cy={height / 2} r={R} stroke={STROKE_COLOR} strokeWidth={15} strokeDasharray={CIRCLE_LENGTH} animatedProps={animatedProps} strokeLinecap={'round'} />
+          <AnimatedCircle style={styles.circle} cx={width / 2} cy={height / 2} r={R} stroke={STROKE_COLOR} strokeWidth={15} strokeDasharray={CIRCLE_LENGTH} animatedProps={animatedProps} strokeLinecap={'round'} />
         </Svg>
         <TouchableOpacity style={styles.button} onPress={onPress}>
           <Text style={styles.buttonText}>{buttonValue}</Text>
@@ -86,21 +86,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
+  svg: {
+    position: 'absolute',
+    bottom: '20%'
+  },
+  glassesOfWaterText: {
+    // position: 'absolute',
+
+  },
   progressText: {
     fontSize: 40,
     color: '#1c7fa6',
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    bottom: '12%'
+
   },
   button: {
     position: 'absolute',
     bottom: 80,
-    width: width * 0.6,
+    width: width * 0.5,
     height: 60,
     backgroundColor: '#1c7fa6',
     borderRadius: 25,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonText: {
     fontSize: 22,
