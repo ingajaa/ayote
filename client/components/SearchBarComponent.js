@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   searchBar: {
-    borderRadius: 10,
+    borderRadius: 20,
     opacity: 0.8,
     shadowOpacity: 0
   }

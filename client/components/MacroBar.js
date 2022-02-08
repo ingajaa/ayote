@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     width: '85%',
     paddingVertical: 10,
     marginHorizontal: 20,
-    borderRadius: 10,
+    borderRadius: 30,
     alignItems: 'center'
   },
   summarySection: {
