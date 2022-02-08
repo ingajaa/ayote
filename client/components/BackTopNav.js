@@ -18,9 +18,9 @@ export default BackTopNav;
 
 const styles = StyleSheet.create({
   backTopNav: {
-    // backgroundColor: '#fe615a',
     width: '100%',
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    marginBottom: 20
   },
   backIcon: {
     width: 26,
