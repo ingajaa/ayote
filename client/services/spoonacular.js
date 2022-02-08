@@ -132,10 +132,21 @@ export const spoonacularApi = createApi({
 
         return mutatedResponse;
       }
+    }),
+    getSimilarRecipes: builder.query({
+      query: (recipeId) => `/recipes/${recipeId}/similar`
     })
   })
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useSearchProductQuery, useSearchRecipesQuery, useSearchAllFoodQuery, useGetIngredientInformationQuery, useGetRecipeInformationQuery, useGetProductInformationQuery } = spoonacularApi;
+export const {
+  useSearchProductQuery,
+  useSearchRecipesQuery,
+  useSearchAllFoodQuery,
+  useGetIngredientInformationQuery,
+  useGetRecipeInformationQuery,
+  useGetProductInformationQuery,
+  useGetSimilarRecipesQuery
+} = spoonacularApi;
