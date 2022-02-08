@@ -8,6 +8,10 @@ import {
   setDailyCaloriesGoal,
   selectDailyProteinGoal,
   setDailyProteinGoal,
+  selectDailyCarbsGoal,
+  setDailyCarbsGoal,
+  selectDailyFatGoal,
+  setDailyFatGoal
 } from '../slices/userProfileSlice';
 import { useGetAllMealsQuery } from '../services/ayote';
 import CircularProgress from 'react-native-circular-progress-indicator';
@@ -25,6 +29,8 @@ const MacroBar = () => {
     if (targets.data && targets.data.length > 0) {
       dispatch(setDailyCaloriesGoal(targets.data[0].dailyCaloriesGoal));
       dispatch(setDailyProteinGoal(targets.data[0].dailyProteinGoal));
+      dispatch(setDailyCarbsGoal(targets.data[0].dailyCarbsGoal));
+      dispatch(setDailyFatGoal(targets.data[0].dailyFatGoal));
     }
     if (meals.data && meals.data.length > 0) {
       setConsumedCalories(aggregateConsumedCalories(meals.data)?.totalCalories);
@@ -36,6 +42,8 @@ const MacroBar = () => {
 
   const dailyCaloriesGoal = useSelector(selectDailyCaloriesGoal);
   const dailyProteinGoal = useSelector(selectDailyProteinGoal);
+  const dailyCarbsGoal = useSelector(selectDailyCarbsGoal);
+  const dailyFatGoal = useSelector(selectDailyFatGoal);
 
   const aggregateConsumedCalories = (meals) => {
     if (!meals.length) return { totalCalories: 0 };
@@ -69,6 +77,12 @@ const MacroBar = () => {
     });
   };
 
+  const unconsumedCalories = dailyCaloriesGoal - consumedCalories;
+  const unconsumedProtein = dailyProteinGoal - consumedProtein;
+  const unconsumedCarbs = dailyCarbsGoal - consumedCarbs;
+  const unconsumedFat = (dailyFatGoal - consumedFat).toFixed(2);
+
+
   return (
     <View style={styles.macroBarStyle}>
       <View style={styles.summarySection}>
@@ -85,9 +99,15 @@ const MacroBar = () => {
         <Text
         style={styles.summarySectionText}
         >
-          Protein: ({consumedProtein}/{dailyProteinGoal})
-          Carbs: ${consumedCarbs}
-          Fat: ${consumedFat}
+          <Text style={styles.proteinText}>
+          Protein: {unconsumedProtein}g to go til {dailyProteinGoal};
+          </Text>
+          <Text style={styles.carbsText}>
+          Carbs: {unconsumedCarbs}g to go til {dailyCarbsGoal};
+          </Text>
+          <Text style={styles.fatText}>
+          Fat: {unconsumedFat}g to go til {dailyFatGoal};
+          </Text>
           </Text>
       </View>
       <View styles={styles.macrosSection}>
@@ -142,10 +162,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 10,
     alignItems: 'center',
-    textAlign: 'left'
+    flexDirection: 'column',
   },
   summarySection: {
-    marginVertical: 5
+    marginVertical: 5,
+    flexDirection: 'column',
   },
   caloriesProgressBar: {
     height: 15,
@@ -154,11 +175,17 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   summarySectionText: {
-    color: '#333432'
+    color: '#333432',
+    flexDirection: 'column',
+    // justifyContent: 'center'
   },
   macrosSection: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  proteinText: {
+    flexDirection: 'column',
+    alignItems: 'center',
   }
 });
