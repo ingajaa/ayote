@@ -3,7 +3,12 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { ProgressBar, Colors } from 'react-native-paper';
 import { useGetUserProfileQuery } from '../services/ayote';
-import { selectDailyCaloriesGoal, setDailyCaloriesGoal } from '../slices/userProfileSlice';
+import {
+  selectDailyCaloriesGoal,
+  setDailyCaloriesGoal,
+  selectDailyProteinGoal,
+  setDailyProteinGoal,
+} from '../slices/userProfileSlice';
 import { useGetAllMealsQuery } from '../services/ayote';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
@@ -19,6 +24,7 @@ const MacroBar = () => {
   useEffect(() => {
     if (targets.data && targets.data.length > 0) {
       dispatch(setDailyCaloriesGoal(targets.data[0].dailyCaloriesGoal));
+      dispatch(setDailyProteinGoal(targets.data[0].dailyProteinGoal));
     }
     if (meals.data && meals.data.length > 0) {
       setConsumedCalories(aggregateConsumedCalories(meals.data)?.totalCalories);
@@ -29,6 +35,7 @@ const MacroBar = () => {
   }, [targets.data, meals.data]);
 
   const dailyCaloriesGoal = useSelector(selectDailyCaloriesGoal);
+  const dailyProteinGoal = useSelector(selectDailyProteinGoal);
 
   const aggregateConsumedCalories = (meals) => {
     if (!meals.length) return { totalCalories: 0 };
@@ -68,10 +75,20 @@ const MacroBar = () => {
         <Text style={styles.summarySectionText}>
           Calories ({consumedCalories}/{dailyCaloriesGoal} Kcal)
         </Text>
-        <ProgressBar progress={consumedCalories && dailyCaloriesGoal ? +((consumedCalories * 100) / (dailyCaloriesGoal * 100)).toFixed(2) : 0} color={'#FFBF00'} style={styles.caloriesProgressBar} />
+        <ProgressBar
+        progress={consumedCalories && dailyCaloriesGoal ? +((consumedCalories * 100) / (dailyCaloriesGoal * 100)).toFixed(2) : 0}
+        color={'#FFBF00'}
+        style={styles.caloriesProgressBar}
+        />
       </View>
       <View style={styles.summarySection}>
-        <Text style={styles.summarySectionText}>{`Protein: ${consumedProtein}  Carbs: ${consumedCarbs} Fat: ${consumedFat}`}</Text>
+        <Text
+        style={styles.summarySectionText}
+        >
+          Protein: ({consumedProtein}/{dailyProteinGoal})
+          Carbs: ${consumedCarbs}
+          Fat: ${consumedFat}
+          </Text>
       </View>
       <View styles={styles.macrosSection}>
         <CircularProgress
