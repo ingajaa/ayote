@@ -77,7 +77,7 @@ const MacroBar = () => {
     });
   };
 
-  const unconsumedCalories = dailyCaloriesGoal - consumedCalories;
+  //const unconsumedCalories = dailyCaloriesGoal - consumedCalories;
   const unconsumedProtein = dailyProteinGoal - consumedProtein;
   const unconsumedCarbs = dailyCarbsGoal - consumedCarbs;
   const unconsumedFat = (dailyFatGoal - consumedFat).toFixed(2);
@@ -106,7 +106,7 @@ const MacroBar = () => {
           {unconsumedFat}g fat to go today til {dailyFatGoal}
           </Text>
       </View>
-      <View styles={styles.macrosSection}>
+      <Text styles={styles.macrosSection}>
         <CircularProgress
           value={consumedProtein ? consumedProtein : 0}
           radius={25}
@@ -140,7 +140,7 @@ const MacroBar = () => {
           activeStrokeWidth={6}
           inActiveStrokeWidth={6}
         />
-      </View>
+      </Text>
     </View>
   );
 };
@@ -157,8 +157,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginHorizontal: 20,
     borderRadius: 10,
-    alignItems: 'center',
-    flexDirection: 'column'
+    alignItems: 'center'
   },
   summarySection: {
     marginVertical: 5,
@@ -172,7 +171,7 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   summarySectionText: {
-    color: '#333432',
+    color: '#dba70d',
     flexDirection: 'column',
     alignItems: 'center'
   },
