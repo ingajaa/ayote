@@ -14,6 +14,10 @@ const MealContainer = () => {
   const [deleteMeal, results] = useDeleteMealMutation();
   const [visible, setVisible] = React.useState(false);
 
+  const formatNutritionValue = (value) => {
+    return value.toFixed(0);
+  };
+
   const onSwipePress = async (itemId) => {
     await deleteMeal(itemId);
   };
@@ -41,10 +45,20 @@ const MealContainer = () => {
       <Swipeable renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item._id)}>
         <LinearGradient colors={['#D16BA5', '#86A8E7', '#5FFBF1']} style={styles.mealContainerStyle} key={item._id}>
           <Text style={styles.mealTitle}>{item.foodName}</Text>
-          <Text style={styles.macros}>Calories: {item.totalCalories}</Text>
-          <Text style={styles.macros}>Protein: {item.totalProtein}</Text>
-          <Text style={styles.macros}>Carbs: {item.totalCarbs}</Text>
-          <Text style={styles.macros}>Fat: {item.totalFat}</Text>
+          <View style={styles.nutritionSection}>
+            <Text style={styles.caloriesText}>{formatNutritionValue(item.totalCalories)} Kcal</Text>
+            <View style={styles.macrosSection}>
+              <View style={styles.proteinCircle}>
+                <Text style={styles.macroCircleText}>P{formatNutritionValue(item.totalProtein)}</Text>
+              </View>
+              <View style={styles.carbsCircle}>
+                <Text style={styles.macroCircleText}>C{formatNutritionValue(item.totalCarbs)}</Text>
+              </View>
+              <View style={styles.fatCircle}>
+                <Text style={styles.macroCircleText}>F{formatNutritionValue(item.totalFat)}</Text>
+              </View>
+            </View>
+          </View>
         </LinearGradient>
       </Swipeable>
     );
@@ -122,17 +136,18 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     marginVertical: 10,
     paddingVertical: 20,
-    borderRadius: 10,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    borderRadius: 10
   },
   mealTitle: {
-    fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
+    marginHorizontal: 25,
+    fontWeight: '500'
   },
-  macros: {
-    color: '#fff'
+  caloriesText: {
+    fontWeight: '200',
+    fontStyle: 'italic',
+    color: '#fff',
+    marginRight: 10
   },
   text: {
     color: '#fff',
@@ -172,6 +187,37 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     padding: 3
+  },
+  nutritionSection: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 5, marginHorizontal: 25 },
+  macrosSection: { flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  proteinCircle: {
+    width: 28,
+    height: 28,
+    justifyContent: 'center',
+    borderRadius: 28 / 2,
+    backgroundColor: 'white',
+    marginRight: 10
+  },
+  carbsCircle: {
+    width: 28,
+    height: 28,
+    justifyContent: 'center',
+    borderRadius: 28 / 2,
+    backgroundColor: 'white',
+    marginRight: 10
+  },
+  fatCircle: {
+    width: 28,
+    height: 28,
+    justifyContent: 'center',
+    borderRadius: 28 / 2,
+    backgroundColor: 'white'
+  },
+  macroCircleText: {
+    alignSelf: 'center',
+    fontWeight: 'bold',
+    color: '#333432',
+    fontSize: 8
   }
 });
 
