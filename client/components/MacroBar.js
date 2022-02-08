@@ -97,13 +97,13 @@ const MacroBar = () => {
       </View>
       <View style={styles.summarySection}>
           <Text style={styles.proteinText}>
-          {unconsumedProtein}g protein to go today til {dailyProteinGoal}
+          Protein {unconsumedProtein}g to go today til daily {dailyProteinGoal}
           </Text>
           <Text style={styles.carbsText}>
-          {unconsumedCarbs}g carbs to go today til {dailyCarbsGoal}
+          Carbs {unconsumedCarbs}g to go today til daily {dailyCarbsGoal}
           </Text>
           <Text style={styles.fatText}>
-          {unconsumedFat}g fat to go today til {dailyFatGoal}
+          Fat {unconsumedFat}g to go today til daily {dailyFatGoal}
           </Text>
       </View>
       <Text styles={styles.macrosSection}>
@@ -150,6 +150,7 @@ export default MacroBar;
 const styles = StyleSheet.create({
   macroBarStyle: {
     backgroundColor: '#fff',
+    opacity: 0.85,
     borderColor: 'lightgrey',
     borderWidth: 1,
     marginVertical: 20,
