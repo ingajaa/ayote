@@ -104,7 +104,7 @@ const MacroBar = () => {
         <CircularProgress
           value={consumedProtein ? consumedProtein : 0}
           radius={25}
-          maxValue={100}
+          maxValue={dailyProteinGoal > consumedProtein ? dailyProteinGoal : consumedProtein}
           activeStrokeColor={'#355c7d'}
           inActiveStrokeColor={'#9b59b6'}
           inActiveStrokeOpacity={0.2}
@@ -115,7 +115,7 @@ const MacroBar = () => {
         <CircularProgress
           value={consumedCarbs ? consumedCarbs : 0}
           radius={25}
-          maxValue={100}
+          maxValue={dailyCarbsGoal > consumedCarbs ? dailyCarbsGoal : consumedCarbs}
           activeStrokeColor={'#920036'}
           inActiveStrokeColor={'#9b59b6'}
           inActiveStrokeOpacity={0.2}
@@ -126,7 +126,7 @@ const MacroBar = () => {
         <CircularProgress
           value={consumedFat ? consumedFat : 0}
           radius={25}
-          maxValue={100}
+          maxValue={dailyFatGoal > consumedFat ? dailyFatGoal : consumedFat}
           activeStrokeColor={'#f67280'}
           inActiveStrokeColor={'#9b59b6'}
           inActiveStrokeOpacity={0.2}
