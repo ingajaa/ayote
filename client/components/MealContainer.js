@@ -49,13 +49,13 @@ const MealContainer = () => {
             <Text style={styles.caloriesText}>{formatNutritionValue(item.totalCalories)} Kcal</Text>
             <View style={styles.macrosSection}>
               <View style={styles.proteinCircle}>
-                <Text style={styles.macroCircleText}>P{formatNutritionValue(item.totalProtein)}</Text>
+                <Text style={styles.proteinText}>Protein: {formatNutritionValue(item.totalProtein)}</Text>
               </View>
               <View style={styles.carbsCircle}>
-                <Text style={styles.macroCircleText}>C{formatNutritionValue(item.totalCarbs)}</Text>
+                <Text style={styles.carbsText}>Carbs: {formatNutritionValue(item.totalCarbs)}</Text>
               </View>
               <View style={styles.fatCircle}>
-                <Text style={styles.macroCircleText}>F{formatNutritionValue(item.totalFat)}</Text>
+                <Text style={styles.fatText}>Fat: {formatNutritionValue(item.totalFat)}</Text>
               </View>
             </View>
           </View>
@@ -71,7 +71,7 @@ const MealContainer = () => {
           Your Meals
         </Text>
         <Button style={styles.customMealButton} size="small" status="success" onPress={() => setVisible(true)}>
-          Add
+          + New
         </Button>
         <Modal visible={visible} backdropStyle={styles.backdrop} onBackdropPress={() => setVisible(false)}>
           <Card disabled={true}>
@@ -141,12 +141,14 @@ const styles = StyleSheet.create({
   mealTitle: {
     color: '#fff',
     marginHorizontal: 25,
-    fontWeight: '500'
+    fontWeight: '500',
+    fontSize: 20
   },
   caloriesText: {
-    fontWeight: '200',
+    fontWeight: '300',
     fontStyle: 'italic',
     color: '#fff',
+    fontSize: 20,
     marginRight: 10
   },
   text: {
@@ -191,33 +193,48 @@ const styles = StyleSheet.create({
   nutritionSection: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 5, marginHorizontal: 25 },
   macrosSection: { flex: 0, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
   proteinCircle: {
-    width: 28,
-    height: 28,
+    width: 60,
+    height: 20,
     justifyContent: 'center',
-    borderRadius: 28 / 2,
-    backgroundColor: 'white',
+    borderRadius: 10 / 2,
+    backgroundColor: '#c9a0dc',
     marginRight: 10
   },
   carbsCircle: {
-    width: 28,
-    height: 28,
+    width: 60,
+    height: 20,
     justifyContent: 'center',
-    borderRadius: 28 / 2,
-    backgroundColor: 'white',
+    borderRadius: 10 / 2,
+    backgroundColor: '#c9a0dc',
     marginRight: 10
   },
   fatCircle: {
-    width: 28,
-    height: 28,
+    width: 60,
+    height: 20,
     justifyContent: 'center',
-    borderRadius: 28 / 2,
-    backgroundColor: 'white'
+    borderRadius: 10 / 2,
+    backgroundColor: '#c9a0dc'
   },
-  macroCircleText: {
+  proteinText: {
     alignSelf: 'center',
-    fontWeight: 'bold',
-    color: '#333432',
-    fontSize: 8
+    fontWeight: '500',
+    color: '#fff',
+    fontSize: 8,
+    marginHorizontal: 5
+  },
+  carbsText: {
+    alignSelf: 'center',
+    fontWeight: '500',
+    color: '#fff',
+    fontSize: 8,
+    marginHorizontal: 5
+  },
+  fatText: {
+    alignSelf: 'center',
+    fontWeight: '500',
+    color: '#fff',
+    fontSize: 8,
+    marginHorizontal: 5
   }
 });
 

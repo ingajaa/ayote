@@ -15,6 +15,7 @@ import {
 } from '../slices/userProfileSlice';
 import { useGetAllMealsQuery } from '../services/ayote';
 import CircularProgress from 'react-native-circular-progress-indicator';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const MacroBar = () => {
   const dispatch = useDispatch();
@@ -44,6 +45,10 @@ const MacroBar = () => {
   const dailyProteinGoal = useSelector(selectDailyProteinGoal);
   const dailyCarbsGoal = useSelector(selectDailyCarbsGoal);
   const dailyFatGoal = useSelector(selectDailyFatGoal);
+
+  const formatNutritionValue = (value) => {
+    return value.toFixed(0);
+  };
 
   const aggregateConsumedCalories = (meals) => {
     if (!meals.length) return { totalCalories: 0 };
@@ -82,66 +87,70 @@ const MacroBar = () => {
   const unconsumedCarbs = dailyCarbsGoal - consumedCarbs;
   const unconsumedFat = (dailyFatGoal - consumedFat).toFixed(2);
 
+  const remainingProtein = consumedProtein - dailyProteinGoal;
+  const remainingCarbs = consumedCarbs - dailyCarbsGoal;
+  const remainingFat = consumedFat - dailyFatGoal;
 
   return (
-    <View style={styles.macroBarStyle}>
+    <LinearGradient colors={['#FB7BA2', '#F6D285', '#F9D29D']} style={styles.macroBarStyle}>
+      {/* <View style={styles.macroBarStyle}> */}
       <View style={styles.summarySection}>
         <Text style={styles.summarySectionText}>
           Calories ({consumedCalories}/{dailyCaloriesGoal} Kcal)
         </Text>
-        <ProgressBar
-        progress={consumedCalories && dailyCaloriesGoal ? +((consumedCalories * 100) / (dailyCaloriesGoal * 100)).toFixed(2) : 0}
-        color={'#FFBF00'}
-        style={styles.caloriesProgressBar}
-        />
-      </View>
-      <View style={styles.summarySection}>
-          <Text style={styles.proteinText}>
-          Protein {unconsumedProtein}g to go today til daily {dailyProteinGoal}
-          </Text>
-          <Text style={styles.carbsText}>
-          Carbs {unconsumedCarbs}g to go today til daily {dailyCarbsGoal}
-          </Text>
-          <Text style={styles.fatText}>
-          Fat {unconsumedFat}g to go today til daily {dailyFatGoal}
-          </Text>
+        <ProgressBar progress={consumedCalories && dailyCaloriesGoal ? +((consumedCalories * 100) / (dailyCaloriesGoal * 100)).toFixed(2) : 0} color={'#fff'} style={styles.caloriesProgressBar} />
       </View>
       <Text styles={styles.macrosSection}>
         <CircularProgress
           value={consumedProtein ? consumedProtein : 0}
           radius={25}
-          maxValue={100}
+          maxValue={dailyProteinGoal > consumedProtein ? dailyProteinGoal : consumedProtein}
           activeStrokeColor={'#355c7d'}
           inActiveStrokeColor={'#9b59b6'}
           inActiveStrokeOpacity={0.2}
-          fontSize={12}
+          fontSize={14}
           activeStrokeWidth={6}
           inActiveStrokeWidth={6}
         />
         <CircularProgress
           value={consumedCarbs ? consumedCarbs : 0}
           radius={25}
-          maxValue={100}
+          maxValue={dailyCarbsGoal > consumedCarbs ? dailyCarbsGoal : consumedCarbs}
           activeStrokeColor={'#920036'}
           inActiveStrokeColor={'#9b59b6'}
           inActiveStrokeOpacity={0.2}
-          fontSize={12}
+          fontSize={14}
           activeStrokeWidth={6}
           inActiveStrokeWidth={6}
         />
         <CircularProgress
           value={consumedFat ? consumedFat : 0}
           radius={25}
-          maxValue={100}
+          maxValue={dailyFatGoal > consumedFat ? dailyFatGoal : consumedFat}
           activeStrokeColor={'#f67280'}
           inActiveStrokeColor={'#9b59b6'}
           inActiveStrokeOpacity={0.2}
-          fontSize={12}
+          fontSize={14}
           activeStrokeWidth={6}
           inActiveStrokeWidth={6}
         />
       </Text>
-    </View>
+      <View style={styles.macroSummarySection}>
+        <Text style={styles.proteinText}>
+          Δ P: {remainingProtein > 0 ? '+' : ''}
+          {formatNutritionValue(remainingProtein)}g
+        </Text>
+        <Text style={styles.carbsText}>
+          Δ C: {remainingCarbs > 0 ? '+' : ''}
+          {formatNutritionValue(remainingCarbs)}g
+        </Text>
+        <Text style={styles.fatText}>
+          Δ F: {remainingFat > 0 ? '+' : ''}
+          {formatNutritionValue(remainingFat)}g
+        </Text>
+      </View>
+      {/* </View> */}
+    </LinearGradient>
   );
 };
 
@@ -149,21 +158,18 @@ export default MacroBar;
 
 const styles = StyleSheet.create({
   macroBarStyle: {
-    backgroundColor: '#fff',
     opacity: 0.85,
-    borderColor: 'lightgrey',
-    borderWidth: 1,
     marginVertical: 20,
     width: '85%',
     paddingVertical: 10,
     marginHorizontal: 20,
-    borderRadius: 30,
+    borderRadius: 10,
     alignItems: 'center'
   },
   summarySection: {
     marginVertical: 5,
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   caloriesProgressBar: {
     height: 15,
@@ -172,9 +178,8 @@ const styles = StyleSheet.create({
     borderRadius: 6
   },
   summarySectionText: {
-    color: '#dba70d',
-    flexDirection: 'column',
-    alignItems: 'center'
+    color: '#fff',
+    fontWeight: '600'
   },
   macrosSection: {
     flex: 1,
@@ -183,11 +188,19 @@ const styles = StyleSheet.create({
   },
   proteinText: {
     color: '#355c7d',
+    marginHorizontal: 10
   },
   carbsText: {
     color: '#920036',
+    marginHorizontal: 10
   },
   fatText: {
     color: '#f67280',
+    marginHorizontal: 10
+  },
+  macroSummarySection: {
+    flex: 0,
+    marginVertical: 5,
+    flexDirection: 'row'
   }
 });
