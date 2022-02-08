@@ -96,18 +96,14 @@ const MacroBar = () => {
         />
       </View>
       <View style={styles.summarySection}>
-        <Text
-        style={styles.summarySectionText}
-        >
           <Text style={styles.proteinText}>
-          Protein: {unconsumedProtein}g to go til {dailyProteinGoal};
+          {unconsumedProtein}g protein to go today til {dailyProteinGoal}
           </Text>
           <Text style={styles.carbsText}>
-          Carbs: {unconsumedCarbs}g to go til {dailyCarbsGoal};
+          {unconsumedCarbs}g carbs to go today til {dailyCarbsGoal}
           </Text>
           <Text style={styles.fatText}>
-          Fat: {unconsumedFat}g to go til {dailyFatGoal};
-          </Text>
+          {unconsumedFat}g fat to go today til {dailyFatGoal}
           </Text>
       </View>
       <View styles={styles.macrosSection}>
@@ -126,7 +122,7 @@ const MacroBar = () => {
           value={consumedCarbs ? consumedCarbs : 0}
           radius={25}
           maxValue={100}
-          activeStrokeColor={'#c06c84'}
+          activeStrokeColor={'#920036'}
           inActiveStrokeColor={'#9b59b6'}
           inActiveStrokeOpacity={0.2}
           fontSize={12}
@@ -162,11 +158,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 10,
     alignItems: 'center',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   summarySection: {
     marginVertical: 5,
     flexDirection: 'column',
+    alignItems: 'center',
   },
   caloriesProgressBar: {
     height: 15,
@@ -177,7 +174,7 @@ const styles = StyleSheet.create({
   summarySectionText: {
     color: '#333432',
     flexDirection: 'column',
-    // justifyContent: 'center'
+    alignItems: 'center'
   },
   macrosSection: {
     flex: 1,
@@ -185,7 +182,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   proteinText: {
-    flexDirection: 'column',
-    alignItems: 'center',
+    color: '#355c7d',
+  },
+  carbsText: {
+    color: '#920036',
+  },
+  fatText: {
+    color: '#f67280',
   }
 });
