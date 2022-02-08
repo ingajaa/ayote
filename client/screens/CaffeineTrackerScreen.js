@@ -4,7 +4,7 @@ import React from 'react';
 const CaffeineTrackerScreen = () => {
   return (
     <View>
-      <Text></Text>
+      <Text>Helloo Coffeee</Text>
     </View>
   );
 };

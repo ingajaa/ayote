@@ -21,6 +21,7 @@ import TrackFoodScreen from './screens/TrackFoodScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
 import TrackCustomMealScreen from './screens/TrackCustomMealScreen';
 import BarcodeScannerScreen from './screens/BarcodeScannerScreen';
+import CaffeineTrackerScreen from './screens/CaffeineTrackerScreen';
 
 export default function App() {
   const Stack = createStackNavigator();
@@ -41,6 +42,7 @@ export default function App() {
               <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} options={{ headerShown: false }} />
               <Stack.Screen name="TrackCustomMealScreen" component={TrackCustomMealScreen} options={{ headerShown: false }} />
               <Stack.Screen name="BarcodeScannerScreen" component={BarcodeScannerScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="CaffeineTrackerScreen" component={CaffeineTrackerScreen} options={{headerShown: false}} />
             </Stack.Navigator>
           </SafeAreaProvider>
         </NavigationContainer>

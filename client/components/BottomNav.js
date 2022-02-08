@@ -14,7 +14,7 @@ const UserIcon = (props) => <Icon {...props} name="bell-outline" fill="#fe615a" 
 const BottomNav = () => {
   const navigation = useNavigation();
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const routes = ['WaterTrackScreen', 'HomeScreen', 'HomeScreen'];
+  const routes = ['WaterTrackScreen', 'HomeScreen', 'CaffeineTrackerScreen'];
   return (
     <BottomNavigation
       style={styles.navBar}
