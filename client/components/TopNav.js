@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Icon, Tab, TabBar } from '@ui-kitten/components';
 import { useNavigation } from '@react-navigation/native';
+import { Ionicons } from '@expo/vector-icons';
 
 const PersonIcon = (props) => <Icon {...props} fill="#fff" name={'person-outline'} />;
 const BellIcon = (props) => <Icon {...props} fill="#fff" name="bell-outline" />;
