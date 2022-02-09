@@ -74,13 +74,25 @@ const TrackFoodScreen = () => {
       totalGrams: trackedGrams
     };
     addMeal(body);
+    dispatch(setCaloriesPerGram(null))
+    dispatch(setProteinPerGram(null))
+    dispatch(setCarbsPerGram(null))
+    dispatch(setFatPerGram(null))
+    dispatch(setTrackedGrams(null))
+    dispatch(setTrackedCalories(null))
+    dispatch(setTrackedProtein(null))
+    dispatch(setTrackedCarbs(null))
+    dispatch(setTrackedFat(null))
+    dispatch(setId(null))
+    dispatch(setName(null))
+    dispatch(setCategory(null))
     navigation.navigate('HomeScreen');
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <Layout style={styles.container} level="1">
-        <Text>{foodName.toUpperCase()}</Text>
+        <Text>{foodName?.toUpperCase()}</Text>
         <Input style={styles.input} placeholder="Quantity in grams" value={trackedGrams} onChangeText={onChange} />
         <Text>Calories: {trackedCalories}</Text>
         <Text>Protein: {trackedProtein}</Text>

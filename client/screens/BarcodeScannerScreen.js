@@ -44,7 +44,9 @@ const BarcodeScannerScreen = () => {
       setHasPermission(status === 'granted');
     })();
     if (response.data) {
+      console.log('THIS IS 1ST IF!!!!!!!!' )
       if (response.data && response.data.status !== 0) {
+        console.log('THIS IS 2ND IF!!!!!!!!' )
         dispatch(setName(response.data.name));
         dispatch(setCategory(response.data.category));
         dispatch(setImage(response.data.image));
@@ -55,6 +57,7 @@ const BarcodeScannerScreen = () => {
         setScanned(false);
         navigation.navigate('ProductDetailsScreen');
       } else {
+        console.log('THIS IS 3RD IF!!!!!!!!' )
         alert(`Ooops, can't find that product...`);
         navigation.navigate('HomeScreen');
       }
