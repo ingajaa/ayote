@@ -15,7 +15,7 @@ import { setUserId, setDailyCaloriesGoal, setDailyGlassCountGoal } from '../slic
 const HomeScreen = () => {
   return (
     <Fragment>
-      <SafeAreaView style={{ flex: 0, backgroundColor: "#fe615a" }} />
+      <SafeAreaView style={{ flex: 0, backgroundColor: "#151515" }} />
       <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         <Layout style={styles.Layout}>
           <TopNav />
@@ -32,5 +32,9 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  Layout: { flex: 2, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: "#fe615a" }
+  Layout: {
+    flex: 2,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: "#151515" }
 });
