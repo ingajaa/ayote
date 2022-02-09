@@ -17,7 +17,21 @@ const BarcodeScannerScreen = () => {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    fetch(`https://world.openfoodfacts.org/api/v0/product/${data}.json`)
+      .then((response) => {
+        if (response.ok && response.status) return response.json();
+        throw response;
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.status === 0) {
+          alert(`Ooops, could not find information for this product`);
+        } else alert(`Scanned!`);
+      })
+      .catch((error) => {
+        console.log(error);
+        alert(`Ooops, could not find information for this product`);
+      });
   };
 
   if (hasPermission === null) {
