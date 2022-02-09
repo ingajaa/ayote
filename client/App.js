@@ -9,7 +9,8 @@ import 'react-native-gesture-handler';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { FeatherIconsPack } from './components/feather-icons';
+import { Feather } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 
 // Screens
 import HomeScreen from './screens/HomeScreen';
@@ -28,7 +29,7 @@ export default function App() {
   const Stack = createStackNavigator();
   return (
     <Provider store={store}>
-      <IconRegistry icons={[EvaIconsPack, FeatherIconsPack]} />
+      <IconRegistry icons={[EvaIconsPack, Feather, Fontisto]} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <NavigationContainer>
           <SafeAreaProvider>

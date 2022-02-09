@@ -4,13 +4,19 @@ import { Text, BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/co
 import { useNavigation } from '@react-navigation/native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
-//import Icon from './feather-icons';
+import { Feather } from '@expo/vector-icons'
+import { FontAwesome } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { LogBox } from "react-native";
+LogBox.ignoreLogs(["Invalid props.style key `tintColor` supplied to `Text`."]);
 
-const DropletIcon = (props) => <Icon {...props} name="droplet-outline" fill="#fe615a" />;
 
-const BellIcon = (props) => <Icon {...props} name="home-outline" fill="#fe615a" />;
+const DropletIcon = (props) => <Ionicons {...props} name="water-outline" size={24} color="#fe615a" />;
 
-const CoffeeIcon = (props) => <Icon {...props} name="coffee" stroke="#fe615a" tint="#fe615a" pack='feather' />;
+const FoodIcon = (props) => <Ionicons {...props} name="fast-food-outline" size={24} color="#fe615a" />;
+
+const CoffeeIcon = (props) => <Feather {...props} name="coffee" size={24} color="#fe615a" />;
 
 const BottomNav = () => {
   const navigation = useNavigation();
@@ -27,7 +33,7 @@ const BottomNav = () => {
       }}
     >
       <BottomNavigationTab icon={DropletIcon} />
-      <BottomNavigationTab icon={BellIcon} />
+      <BottomNavigationTab icon={FoodIcon} />
       <BottomNavigationTab icon={CoffeeIcon} />
     </BottomNavigation>
   );

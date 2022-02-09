@@ -1,7 +1,7 @@
 import { StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
 import React, { Fragment, useEffect } from 'react';
 import { useSearchProductQuery } from '../services/spoonacular';
-import { ApplicationProvider, Layout, Divider, Text, Button, TopNavigation, BottomNavigation, BottomNavigationTab } from '@ui-kitten/components';
+import { Layout } from '@ui-kitten/components';
 import TopNav from '../components/TopNav';
 import LogoComponent from '../components/LogoComponent';
 import SearchBarComponent from '../components/SearchBarComponent';
@@ -15,7 +15,7 @@ import { setUserId, setDailyCaloriesGoal, setDailyGlassCountGoal } from '../slic
 const HomeScreen = () => {
   return (
     <Fragment>
-      <SafeAreaView style={{ flex: 0, backgroundColor: '#231F20' }} />
+      <SafeAreaView style={{ flex: 0, backgroundColor: "#fe615a" }} />
       <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         <Layout style={styles.Layout}>
           <TopNav />
@@ -32,5 +32,5 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  Layout: { flex: 2, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: '#231F20' }
+  Layout: { flex: 2, justifyContent: 'flex-start', alignItems: 'center', backgroundColor: "#fe615a" }
 });
