@@ -31,7 +31,7 @@ export default TopNav;
 const styles = StyleSheet.create({
   topTabBar: {
     // borderWidth: 1,
-    backgroundColor: '#fe615a',
+    backgroundColor: '#231F20',
     width: '100%',
     paddingLeft: 30,
     paddingRight: 30,

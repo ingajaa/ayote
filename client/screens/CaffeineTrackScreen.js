@@ -6,7 +6,12 @@ import { ReText } from 'react-native-redash';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectGlassCount, addGlass, setGlassCount, selectDailyGlassGoal } from '../slices/waterSlice';
 import BackTopNav from '../components/BackTopNav';
-import { selectDailyGlassCountGoal, setDailyGlassCountGoal } from '../slices/userProfileSlice';
+import {
+  selectDailyGlassCountGoal,
+  setDailyGlassCountGoal,
+  selectDailyCaffeineCountGoal,
+  setDailyCaffeineCountGoal
+} from '../slices/userProfileSlice';
 import { useGetUserProfileQuery } from '../services/ayote';
 
 const BACKGROUND_COLOR = '#d4f1f9';

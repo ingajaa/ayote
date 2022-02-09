@@ -4,12 +4,13 @@ import { Text, BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/co
 import { useNavigation } from '@react-navigation/native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import { LinearGradient } from 'expo-linear-gradient';
+//import Icon from './feather-icons';
 
 const DropletIcon = (props) => <Icon {...props} name="droplet-outline" fill="#fe615a" />;
 
 const BellIcon = (props) => <Icon {...props} name="home-outline" fill="#fe615a" />;
 
-const UserIcon = (props) => <Icon {...props} name="bell-outline" fill="#fe615a" />;
+const CoffeeIcon = (props) => <Icon {...props} name="coffee" stroke="#fe615a" tint="#fe615a" pack='feather' />;
 
 const BottomNav = () => {
   const navigation = useNavigation();
@@ -27,7 +28,7 @@ const BottomNav = () => {
     >
       <BottomNavigationTab icon={DropletIcon} />
       <BottomNavigationTab icon={BellIcon} />
-      <BottomNavigationTab icon={UserIcon} />
+      <BottomNavigationTab icon={CoffeeIcon} />
     </BottomNavigation>
   );
 };
