@@ -9,6 +9,8 @@ import 'react-native-gesture-handler';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, IconRegistry, Layout, Text } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
+import { Feather } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
 
 // Screens
 import HomeScreen from './screens/HomeScreen';
@@ -21,12 +23,13 @@ import TrackFoodScreen from './screens/TrackFoodScreen';
 import UserProfileScreen from './screens/UserProfileScreen';
 import TrackCustomMealScreen from './screens/TrackCustomMealScreen';
 import BarcodeScannerScreen from './screens/BarcodeScannerScreen';
+import CaffeineTrackScreen from './screens/CaffeineTrackScreen';
 
 export default function App() {
   const Stack = createStackNavigator();
   return (
     <Provider store={store}>
-      <IconRegistry icons={EvaIconsPack} />
+      <IconRegistry icons={[EvaIconsPack, Feather, Fontisto]} />
       <ApplicationProvider {...eva} theme={eva.light}>
         <NavigationContainer>
           <SafeAreaProvider>
@@ -41,6 +44,7 @@ export default function App() {
               <Stack.Screen name="UserProfileScreen" component={UserProfileScreen} options={{ headerShown: false }} />
               <Stack.Screen name="TrackCustomMealScreen" component={TrackCustomMealScreen} options={{ headerShown: false }} />
               <Stack.Screen name="BarcodeScannerScreen" component={BarcodeScannerScreen} options={{ headerShown: false }} />
+              <Stack.Screen name="CaffeineTrackScreen" component={CaffeineTrackScreen} options={{headerShown: false}} />
             </Stack.Navigator>
           </SafeAreaProvider>
         </NavigationContainer>
