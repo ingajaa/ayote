@@ -30,7 +30,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <IconRegistry icons={[EvaIconsPack, Feather, Fontisto]} />
-      <ApplicationProvider {...eva} theme={eva.light}>
+      <ApplicationProvider {...eva} theme={eva.dark}>
         <NavigationContainer>
           <SafeAreaProvider>
             <Stack.Navigator>

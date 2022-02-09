@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   glassCount: 0,
-  dailyGlassGoal: null
+  // dailyGlassGoal: null
 };
 
 export const waterSlice = createSlice({
@@ -12,16 +12,16 @@ export const waterSlice = createSlice({
     setGlassCount: (state, action) => {
       state.glassCount = action.payload;
     },
-    setDailyGlassGoal: (state, action) => {
-      state.dailyGlassGoal = action.payload;
-    },
+    // setDailyGlassGoal: (state, action) => {
+    //   state.dailyGlassGoal = action.payload;
+    // },
     addGlass: (state, action) => {
       state.glassCount++;
     }
   }
 });
 
-export const { setGlassCount, addGlass, setDailyGlassGoal } = waterSlice.actions;
+export const { setGlassCount, addGlass } = waterSlice.actions;
 
 export const selectGlassCount = (state) => {
   return state.water.glassCount;
