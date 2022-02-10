@@ -58,7 +58,7 @@ const ProductDetailsScreen = () => {
         header={<Header name={name} />}
         footer={<Footer navigation={navigation} />}
         >
-          <View style={styles.nutritionInfo}>
+           <View style={styles.nutritionInfo}>
           <Image style={styles.image} source={{ uri: image }} />
           <Text style={styles.caloricBreakdown}>Caloric Breakdown (100g)</Text>
           <Text style={styles.calories}>Calories: {macroPer100Grams(caloriesPerGram)}Kcal</Text>
@@ -96,18 +96,18 @@ const styles = StyleSheet.create({
     width: '85%',
     marginVertical: 20
   },
-  nutritionInfo: {
-    borderWidth: 1,
-    borderColor: 'lightgrey',
-    borderRadius: 5,
-    backgroundColor: '#151515',
-    paddingHorizontal: 20,
-    paddingVertical: 40
-  },
   footerContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
+nutritionInfo: {
+  borderWidth: 1,
+  borderColor: 'lightgrey',
+  borderRadius: 5,
+  backgroundColor: '#151515',
+  paddingHorizontal: 20,
+  paddingVertical: 40
+},
   footerControl: {
     marginHorizontal: 2,
     borderColor: 'grey',
