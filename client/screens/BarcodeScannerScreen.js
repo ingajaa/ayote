@@ -82,7 +82,10 @@ const BarcodeScannerScreen = () => {
     <SafeAreaView style={styles.safeArea}>
       <BackTopNav backgroundColor={'#fff'} iconFill={'#fff'} style={styles.backTopNav}/>
       <Layout style={styles.container} level="1">
-        <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
+        <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+        />
       </Layout>
     </SafeAreaView>
   );

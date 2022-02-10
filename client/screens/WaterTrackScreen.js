@@ -19,7 +19,7 @@ const STROKE_COLOR = '#1c7fa6';
 
 const { width, height } = Dimensions.get('window');
 
-const CIRCLE_LENGTH = 850;
+const CIRCLE_LENGTH = 780;
 const R = CIRCLE_LENGTH / (2 * Math.PI);
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -107,22 +107,22 @@ const styles = StyleSheet.create({
   },
   svg: {
     position: 'absolute',
-    bottom: '20%'
+    bottom: '14%'
   },
   glassesOfWaterText: {
     color: '#A6E1FA',
-    bottom: '45%',
-    fontSize: 20
+    bottom: '46%',
+    fontSize: 25
   },
   progressText: {
-    fontSize: 50,
+    fontSize: 70,
     color: '#1c7fa6',
     fontFamily: 'Noteworthy',
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',
     position: 'relative',
-    bottom: '43%'
+    bottom: '42%'
 
   },
   button: {
@@ -135,11 +135,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: BACKGROUND_STROKE_COLOR
+    borderColor: BACKGROUND_STROKE_COLOR,
+    bottom: '10%'
   },
   buttonText: {
     fontSize: 20,
-    color: 'white',
+    color: BACKGROUND_STROKE_COLOR,
     letterSpacing: 2.0,
     fontFamily: 'Helvetica'
   }

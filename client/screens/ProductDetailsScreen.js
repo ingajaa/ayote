@@ -26,6 +26,7 @@ const Footer = (props) => (
     <Button
     style={styles.footerControl}
     size="medium"
+    status='basic'
     onPress={() => props.navigation.navigate('TrackFoodScreen')}
     >
       TRACK
@@ -57,12 +58,14 @@ const ProductDetailsScreen = () => {
         header={<Header name={name} />}
         footer={<Footer navigation={navigation} />}
         >
+          <View style={styles.nutritionInfo}>
           <Image style={styles.image} source={{ uri: image }} />
-          <Text>Caloric Breakdown (100g)</Text>
-          <Text>Calories: {macroPer100Grams(caloriesPerGram)}Kcal</Text>
-          <Text>Protein: {macroPer100Grams(proteinPerGram)}g</Text>
-          <Text>Carbs: {macroPer100Grams(carbsPerGram)}g</Text>
-          <Text>Fat: {macroPer100Grams(fatPerGram)}g</Text>
+          <Text style={styles.caloricBreakdown}>Caloric Breakdown (100g)</Text>
+          <Text style={styles.calories}>Calories: {macroPer100Grams(caloriesPerGram)}Kcal</Text>
+          <Text style={styles.protein}>Protein: {macroPer100Grams(proteinPerGram)}g</Text>
+          <Text style={styles.carbs}>Carbs: {macroPer100Grams(carbsPerGram)}g</Text>
+          <Text style={styles.fat}>Fat: {macroPer100Grams(fatPerGram)}g</Text>
+          </View>
         </Card>
       </Layout>
     </SafeAreaView>
@@ -93,17 +96,29 @@ const styles = StyleSheet.create({
     width: '85%',
     marginVertical: 20
   },
+  nutritionInfo: {
+    borderWidth: 1,
+    borderColor: 'lightgrey',
+    borderRadius: 5,
+    backgroundColor: '#151515',
+    paddingHorizontal: 20,
+    paddingVertical: 40
+  },
   footerContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
   footerControl: {
-    marginHorizontal: 2
+    marginHorizontal: 2,
+    borderColor: 'grey',
+    marginTop: 20
   },
   image: {
     alignSelf: 'center',
     width: 250,
-    height: 190
+    height: 190,
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5
   },
   similarRecipesHeading: {
     textAlign: 'left',
@@ -111,5 +126,27 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 10,
     color: '#fff'
+  },
+  caloricBreakdown: {
+    textAlign: 'center',
+    marginTop: 30,
+    color: '#fff'
+  },
+  calories: {
+    textAlign: 'center',
+    color: '#fff'
+  },
+  protein: {
+    textAlign: 'center',
+    color: '#fff'
+  },
+  carbs: {
+    textAlign: 'center',
+    color: '#fff'
+  },
+  fat: {
+    textAlign: 'center',
+    color: '#fff',
+    marginBottom: 5
   }
 });
