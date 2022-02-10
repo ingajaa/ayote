@@ -3,7 +3,16 @@ import { Layout, Text, Spinner, Card, Button } from '@ui-kitten/components';
 import { StyleSheet, SafeAreaView, View, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
-import { selectId, selectName, selectImage, selectCategory, selectProteinPerGram, selectCarbsPerGram, selectFatPerGram, selectCaloriesPerGram } from '../slices/currentItemSlice';
+import {
+  selectId,
+  selectName,
+  selectImage,
+  selectCategory,
+  selectProteinPerGram,
+  selectCarbsPerGram,
+  selectFatPerGram,
+  selectCaloriesPerGram
+} from '../slices/currentItemSlice';
 
 const Header = (props) => (
   <View {...props}>
@@ -14,7 +23,11 @@ const Header = (props) => (
 
 const Footer = (props) => (
   <View {...props} style={[props.style, styles.footerContainer]}>
-    <Button style={styles.footerControl} size="medium" onPress={() => props.navigation.navigate('TrackFoodScreen')}>
+    <Button
+    style={styles.footerControl}
+    size="medium"
+    onPress={() => props.navigation.navigate('TrackFoodScreen')}
+    >
       TRACK
     </Button>
   </View>
@@ -39,7 +52,11 @@ const ProductDetailsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Layout style={styles.layout}>
-        <Card style={styles.card} header={<Header name={name} />} footer={<Footer navigation={navigation} />}>
+        <Card
+        style={styles.card}
+        header={<Header name={name} />}
+        footer={<Footer navigation={navigation} />}
+        >
           <Image style={styles.image} source={{ uri: image }} />
           <Text>Caloric Breakdown (100g)</Text>
           <Text>Calories: {macroPer100Grams(caloriesPerGram)}Kcal</Text>
@@ -59,7 +76,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#fe615a'
+    backgroundColor: '#151515'
   },
   container: {
     flex: 1,
@@ -73,7 +90,8 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 2,
     alignItems: 'center',
-    width: '85%'
+    width: '85%',
+    marginVertical: 20
   },
   footerContainer: {
     flexDirection: 'row',
