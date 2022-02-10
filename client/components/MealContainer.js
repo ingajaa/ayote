@@ -42,34 +42,20 @@ const MealContainer = () => {
 
   const renderItem = ({ item }) => {
     return (
-      <Swipeable
-      renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item._id)}
-      >
-        <LinearGradient
-        colors={['#D16BA5', '#86A8E7', '#5FFBF1']}
-        style={styles.mealContainerStyle}
-        key={item._id}
-        >
+      <Swipeable renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item._id)}>
+        <LinearGradient colors={['#D16BA5', '#86A8E7', '#5FFBF1']} style={styles.mealContainerStyle} key={item._id}>
           <Text style={styles.mealTitle}>{item.foodName}</Text>
           <View style={styles.nutritionSection}>
-            <Text style={styles.caloriesText}>
-              {formatNutritionValue(item.totalCalories)} Kcal
-              </Text>
+            <Text style={styles.caloriesText}>{formatNutritionValue(item.totalCalories)} Kcal</Text>
             <View style={styles.macrosSection}>
               <View style={styles.proteinCircle}>
-                <Text style={styles.proteinText}>
-                  Protein: {formatNutritionValue(item.totalProtein)}
-                  </Text>
+                <Text style={styles.proteinText}>Protein: {formatNutritionValue(item.totalProtein)}</Text>
               </View>
               <View style={styles.carbsCircle}>
-                <Text style={styles.carbsText}>
-                  Carbs: {formatNutritionValue(item.totalCarbs)}
-                  </Text>
+                <Text style={styles.carbsText}>Carbs: {formatNutritionValue(item.totalCarbs)}</Text>
               </View>
               <View style={styles.fatCircle}>
-                <Text style={styles.fatText}>
-                  Fat: {formatNutritionValue(item.totalFat)}
-                  </Text>
+                <Text style={styles.fatText}>Fat: {formatNutritionValue(item.totalFat)}</Text>
               </View>
             </View>
           </View>
@@ -84,19 +70,10 @@ const MealContainer = () => {
         <Text style={styles.label} category="label">
           Your Meals
         </Text>
-        <Button
-        style={styles.customMealButton}
-        size="small"
-        status='basic'
-        onPress={() => setVisible(true)}
-        >
+        <Button style={styles.customMealButton} size="small" status="basic" onPress={() => setVisible(true)}>
           + New
         </Button>
-        <Modal
-        visible={visible}
-        backdropStyle={styles.backdrop}
-        onBackdropPress={() => setVisible(false)}
-        >
+        <Modal visible={visible} backdropStyle={styles.backdrop} onBackdropPress={() => setVisible(false)}>
           <Card disabled={true}>
             <Button
               style={styles.modalButton}
@@ -129,13 +106,7 @@ const MealContainer = () => {
         </Modal>
       </View>
       {data && data.length > 0 ? (
-        <FlatList
-        data={data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item._id}
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        />
+        <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item._id} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} />
       ) : (
         <Text style={styles.text}>You are not tracking any meal..</Text>
       )}
@@ -145,7 +116,7 @@ const MealContainer = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     width: '85%',
     marginBottom: 60
   },

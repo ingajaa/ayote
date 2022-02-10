@@ -31,21 +31,20 @@ export default TopNav;
 
 const styles = StyleSheet.create({
   topTabBar: {
-    // borderWidth: 1,
     backgroundColor: "#151515",
     width: '100%',
     paddingLeft: 30,
     paddingRight: 30,
     paddingBottom: 20,
-    marginBottom: 20
+    marginBottom: 10
   },
   profileIconStyle: {
     alignItems: 'flex-start',
     marginRight: 30,
-    marginTop: 30
+    marginTop: 20
   },
   bellIcon: {
-    marginTop: 30,
+    marginTop: 20,
     alignItems: 'flex-end'
   }
 });

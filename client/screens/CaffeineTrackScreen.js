@@ -1,22 +1,30 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Dimensions, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-import Animated, { useSharedValue, useDerivedValue, withTiming, useAnimatedProps } from 'react-native-reanimated';
+import Animated, {
+  useSharedValue,
+  useDerivedValue,
+  withTiming,
+  useAnimatedProps
+} from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCupCount, addCup } from '../slices/caffeineSlice';
 import BackTopNav from '../components/BackTopNav';
-import { selectDailyCaffeineCountGoal, setDailyCaffeineCountGoal } from '../slices/userProfileSlice';
+import {
+  selectDailyCaffeineCountGoal,
+  setDailyCaffeineCountGoal
+} from '../slices/userProfileSlice';
 import { useGetUserProfileQuery } from '../services/ayote';
 
-const BACKGROUND_COLOR = '#d4f1f9';
-const ICON_FILL = '#556064';
-const BACKGROUND_STROKE_COLOR = '#cba79b';
-const STROKE_COLOR = '#56362c';
+const BACKGROUND_COLOR = '#151515';
+const ICON_FILL = '#E6D7D2';
+const BACKGROUND_STROKE_COLOR = '#dcc3bb';
+const STROKE_COLOR = '#715845';
 
 const { width, height } = Dimensions.get('window');
 
-const CIRCLE_LENGTH = 850;
+const CIRCLE_LENGTH = 780;
 const R = CIRCLE_LENGTH / (2 * Math.PI);
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -62,7 +70,13 @@ const CaffeineTrackScreen = () => {
         <Text style={styles.cupsOfCoffeeText}>Cups Of Coffee</Text>
         <ReText style={styles.progressText} text={progressText} />
         <Svg style={styles.svg}>
-          <Circle cx={width / 2} cy={height / 2} r={R} stroke={BACKGROUND_STROKE_COLOR} strokeWidth={30} />
+          <Circle
+          cx={width / 2}
+          cy={height / 2}
+          r={R}
+          stroke={BACKGROUND_STROKE_COLOR}
+          strokeWidth={30}
+          />
           <AnimatedCircle
             style={styles.circle}
             cx={width / 2}
@@ -88,86 +102,50 @@ export default CaffeineTrackScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#E6D7D2'
+    backgroundColor: BACKGROUND_COLOR
   },
   container: {
     flex: 2,
-    backgroundColor: '#E6D7D2',
+    backgroundColor: BACKGROUND_COLOR,
     alignItems: 'center',
     justifyContent: 'center'
   },
   svg: {
     position: 'absolute',
-    bottom: '20%'
+    bottom: '14%'
   },
-  cupsOfCoffee: {
-    // position: 'absolute',
+  cupsOfCoffeeText: {
+    color: BACKGROUND_STROKE_COLOR,
+    bottom: '46.9%',
+    fontSize: 20
   },
   progressText: {
-    fontSize: 40,
+    fontSize: 70,
     color: STROKE_COLOR,
+    fontFamily: 'Noteworthy',
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',
     position: 'relative',
-    bottom: '12%'
+    bottom: '42%'
   },
   button: {
     position: 'absolute',
     bottom: 80,
     width: width * 0.5,
     height: 60,
-    backgroundColor: BACKGROUND_STROKE_COLOR,
+    backgroundColor: STROKE_COLOR,
     borderRadius: 25,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: BACKGROUND_STROKE_COLOR,
+    bottom: '10%'
   },
   buttonText: {
     fontSize: 20,
-    color: 'white',
+    color: BACKGROUND_STROKE_COLOR,
     letterSpacing: 2.0,
     fontFamily: 'Helvetica'
   }
 });
-
-// import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
-// import React from 'react';
-// import CircularProgress from 'react-native-circular-progress-indicator';
-
-// const CaffeineTrackerScreen = () => {
-//   return (
-//     <SafeAreaView style={styles.safeArea}>
-//     <View style={styles.coffeeCircularAnimation}>
-//       <CircularProgress
-//   value={80}
-//   radius={110}
-//   activeStrokeColor={"#5b3a2f"}
-//   inActiveStrokeColor={'#764b3d'}
-//   inActiveStrokeWidth={16}
-//   activeStrokeWidth={12}
-//   inActiveStrokeOpacity={0.2}
-//   textColor={'#fff'}
-//   valueSuffix={'%'}
-//   onAnimationComplete={() => { alert('Stop drinking coffee') }}
-// />
-//     </View>
-//     </SafeAreaView>
-//   );
-// };
-
-// export default CaffeineTrackerScreen;
-
-// const styles = StyleSheet.create({
-//   safeArea: {
-//     flex: 1,
-//     backgroundColor: '#E6D7D2'
-//   },
-//   coffeeCircularAnimation: {
-//     flex: 2,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     position: 'absolute',
-//     bottom: '52%',
-//     left: '22%',
-//   }
-// });

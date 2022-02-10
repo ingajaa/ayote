@@ -87,7 +87,7 @@ export default TrackCustomMealScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fe615a'
+    backgroundColor: '#151515'
   },
   container: {
     flex: 1,
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'center',
     paddingHorizontal: 30,
-    backgroundColor: '#fe615a'
+    backgroundColor: '#151515'
   },
   input: {
     marginBottom: 20,

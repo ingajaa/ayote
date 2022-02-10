@@ -1,22 +1,25 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Dimensions, StyleSheet, Text, View, TouchableOpacity, SafeAreaView } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-import Animated, { useSharedValue, useDerivedValue, withTiming, useAnimatedProps } from 'react-native-reanimated';
+import Animated, {
+  useSharedValue,
+  useDerivedValue,
+  withTiming, useAnimatedProps } from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectGlassCount, addGlass, setGlassCount, selectDailyGlassGoal } from '../slices/waterSlice';
+import { selectGlassCount, addGlass } from '../slices/waterSlice';
 import BackTopNav from '../components/BackTopNav';
 import { selectDailyGlassCountGoal, setDailyGlassCountGoal } from '../slices/userProfileSlice';
 import { useGetUserProfileQuery } from '../services/ayote';
 
-const BACKGROUND_COLOR = '#d4f1f9';
-const ICON_FILL = '#556064';
+const BACKGROUND_COLOR = '#151515';
+const ICON_FILL = '#A6E1FA';
 const BACKGROUND_STROKE_COLOR = '#A6E1FA';
 const STROKE_COLOR = '#1c7fa6';
 
 const { width, height } = Dimensions.get('window');
 
-const CIRCLE_LENGTH = 850;
+const CIRCLE_LENGTH = 780;
 const R = CIRCLE_LENGTH / (2 * Math.PI);
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -59,11 +62,27 @@ const WaterTrackScreen = () => {
     <SafeAreaView style={styles.safeArea}>
       <BackTopNav backgroundColor={BACKGROUND_COLOR} iconFill={ICON_FILL} />
       <View style={styles.container}>
-        <Text style={styles.glassesOfWaterText}>Glasses Of Water</Text>
+        <Text style={styles.glassesOfWaterText}>Glasses Of Water 💧</Text>
         <ReText style={styles.progressText} text={progressText} />
         <Svg style={styles.svg}>
-          <Circle cx={width / 2} cy={height / 2} r={R} stroke={BACKGROUND_STROKE_COLOR} strokeWidth={30} />
-          <AnimatedCircle style={styles.circle} cx={width / 2} cy={height / 2} r={R} stroke={STROKE_COLOR} strokeWidth={15} strokeDasharray={CIRCLE_LENGTH} animatedProps={animatedProps} strokeLinecap={'round'} />
+          <Circle
+          cx={width / 2}
+          cy={height / 2}
+          r={R}
+          stroke={BACKGROUND_STROKE_COLOR}
+          strokeWidth={30}
+          />
+          <AnimatedCircle
+          style={styles.circle}
+          cx={width / 2}
+          cy={height / 2}
+          r={R}
+          stroke={STROKE_COLOR}
+          strokeWidth={15}
+          strokeDasharray={CIRCLE_LENGTH}
+          animatedProps={animatedProps}
+          strokeLinecap={'round'}
+          />
         </Svg>
         <TouchableOpacity style={styles.button} onPress={onPress}>
           <Text style={styles.buttonText}>{buttonValue}</Text>
@@ -88,20 +107,22 @@ const styles = StyleSheet.create({
   },
   svg: {
     position: 'absolute',
-    bottom: '20%'
+    bottom: '14%'
   },
   glassesOfWaterText: {
-    // position: 'absolute',
-
+    color: '#A6E1FA',
+    bottom: '46%',
+    fontSize: 25
   },
   progressText: {
-    fontSize: 40,
+    fontSize: 70,
     color: '#1c7fa6',
+    fontFamily: 'Noteworthy',
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',
     position: 'relative',
-    bottom: '12%'
+    bottom: '42%'
 
   },
   button: {
@@ -113,10 +134,13 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: BACKGROUND_STROKE_COLOR,
+    bottom: '10%'
   },
   buttonText: {
     fontSize: 20,
-    color: 'white',
+    color: BACKGROUND_STROKE_COLOR,
     letterSpacing: 2.0,
     fontFamily: 'Helvetica'
   }

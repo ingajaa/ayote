@@ -80,9 +80,12 @@ const BarcodeScannerScreen = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <BackTopNav backgroundColor={'#fff'} iconFill={'#000'} />
+      <BackTopNav backgroundColor={'#fff'} iconFill={'#fff'} style={styles.backTopNav}/>
       <Layout style={styles.container} level="1">
-        <BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
+        <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+        />
       </Layout>
     </SafeAreaView>
   );
@@ -93,7 +96,7 @@ export default BarcodeScannerScreen;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: '#151515'
   },
   container: {
     flex: 2,
@@ -102,6 +105,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 30,
     marginVertical: 20,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    marginTop: 0,
+    marginBottom: 40
   }
 });

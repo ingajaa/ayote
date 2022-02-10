@@ -34,7 +34,11 @@ const Header = (props) => (
 
 const Footer = (props) => (
   <View {...props} style={[props.style, styles.footerContainer]}>
-    <Button style={styles.footerControl} size="medium" onPress={() => props.navigation.navigate('TrackFoodScreen')}>
+    <Button
+    style={styles.footerControl}
+    size="medium" status='basic'
+    onPress={() => props.navigation.navigate('TrackFoodScreen')}
+    >
       TRACK
     </Button>
   </View>
@@ -74,13 +78,20 @@ const RecipeDetailsScreen = () => {
             <Spinner />
           ) : (
             <>
-              <Card style={styles.card} header={<Header data={data} />} footer={<Footer data={data} navigation={navigation} />}>
+              <Card
+              style={styles.card}
+              header={<Header data={data} />}
+              footer={<Footer data={data}
+              navigation={navigation} />}
+              >
+                <View style={styles.nutrionalInfoContainer}>
                 <Image style={styles.image} source={{ uri: data.image }} />
-                <Text>Caloric Breakdown (100g)</Text>
-                <Text>Calories: {+(data.caloriesPerGram * 100).toFixed(2)}Kcal</Text>
-                <Text>Protein: {+(data.proteinPerGram * 100).toFixed(2)}g</Text>
-                <Text>Carbs: {+(data.carbsPerGram * 100).toFixed(2)}g</Text>
-                <Text>Fat: {+(data.fatPerGram * 100).toFixed(2)}g</Text>
+                <Text style={styles.caloricBreakdown}>Caloric Breakdown (100g)</Text>
+                <Text style={styles.calories}>Calories: {+(data.caloriesPerGram * 100).toFixed(2)}Kcal</Text>
+                <Text style={styles.protein}>Protein: {+(data.proteinPerGram * 100).toFixed(2)}g</Text>
+                <Text style={styles.carbs}>Carbs: {+(data.carbsPerGram * 100).toFixed(2)}g</Text>
+                <Text style={styles.fat}>Fat: {+(data.fatPerGram * 100).toFixed(2)}g</Text>
+                </View>
               </Card>
               {similarRecipes.length > 0 && (
                 <View style={styles.similarRecipesContainer}>
@@ -107,11 +118,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#fe615a'
+    backgroundColor: '#151515'
   },
   container: {
     flex: 1,
-    backgroundColor: '#fe615a'
+    backgroundColor: '#151515'
   },
   similarRecipesContainer: {
     flex: 1,
@@ -128,18 +139,51 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   footerControl: {
-    marginHorizontal: 2
+    marginHorizontal: 2,
+    borderWidth: 1,
+    borderColor: 'black'
   },
   image: {
     alignSelf: 'center',
     width: 250,
-    height: 190
+    height: 190,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10
   },
   similarRecipesHeading: {
     textAlign: 'left',
     alignSelf: 'flex-start',
     marginTop: 20,
     marginBottom: 10,
+    color: '#fff'
+  },
+  nutrionalInfoContainer: {
+    borderWidth: 1,
+    marginTop: 0,
+    marginBottom: 0,
+    borderRadius: 10,
+    backgroundColor: '#151515',
+    paddingHorizontal: 20,
+    paddingVertical: 20
+  },
+  caloricBreakdown: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  calories: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  carbs: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  protein: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  fat: {
+    alignSelf: 'center',
     color: '#fff'
   }
 });

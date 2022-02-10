@@ -41,11 +41,11 @@ const SearchResultsScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#151515' }}>
+      <Layout style={styles.background}>
         <View style={styles.backTopNav}>
           <TouchableOpacity onPress={onBackPress}>
-            <Icon fill={'#000'} name={'arrow-back-outline'} style={styles.backIcon} />
+            <Icon fill={'#fff'} name={'arrow-back-outline'} style={styles.backIcon} />
           </TouchableOpacity>
           <Searchbar style={styles.searchBar} placeholder="Search" onIconPress={onSearchIconPress} onChangeText={onChange} value={searchTerm} />
         </View>
@@ -58,12 +58,20 @@ const SearchResultsScreen = () => {
 export default SearchResultsScreen;
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#151515'
+  },
   searchBar: {
     backgroundColor: '#F5F5F5',
     shadowColor: '#FFFFFF',
     borderColor: '#000',
     borderWidth: 0.3,
-    marginLeft: 5
+    marginLeft: 5,
+    marginRight: 20,
+    marginTop: 30
   },
   backTopNav: {
     flex: 0,
@@ -75,6 +83,7 @@ const styles = StyleSheet.create({
   },
   backIcon: {
     width: 26,
-    height: 26
+    height: 26,
+    marginTop: 30
   }
 });
