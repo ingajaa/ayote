@@ -12,11 +12,11 @@ import { LogBox } from "react-native";
 LogBox.ignoreLogs(["Invalid props.style key `tintColor` supplied to `Text`."]);
 
 
-const DropletIcon = (props) => <Icon {...props} name="droplet-outline" fill="#fe615a" />;
+const DropletIcon = (props) => <Icon {...props} name="droplet-outline" fill='#2a2a2a' />;
 
-const FoodIcon = (props) => <Icon {...props} name="home-outline" fill="#fe615a" />;
+const FoodIcon = (props) => <Icon {...props} name="home-outline" fill='#2a2a2a' />;
 
-const CoffeeIcon = (props) => <Feather {...props} name="coffee" size={22} color="#fe615a" />;
+const CoffeeIcon = (props) => <Feather {...props} name="coffee" size={22} color='#2a2a2a' />;
 
 const BottomNav = () => {
   const navigation = useNavigation();

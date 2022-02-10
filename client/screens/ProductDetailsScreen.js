@@ -1,74 +1,52 @@
 import React from 'react';
 import { Layout, Text, Spinner, Card, Button } from '@ui-kitten/components';
 import { StyleSheet, SafeAreaView, View, Image } from 'react-native';
-import { useGetProductInformationQuery } from '../services/spoonacular';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectId,
-  setId,
-  selectName,
-  setName,
-  selectImage,
-  setImage,
-  selectCategory,
-  setCategory,
-  selectProteinPerServing,
-  setProteinPerServing,
-  selectCarbsPerServing,
-  setCarbsPerServing,
-  selectFatPerServing,
-  setFatPerServing,
-  selectCaloriesPerServing,
-  setCaloriesPerServing
-} from '../slices/currentItemSlice';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import { selectId, selectName, selectImage, selectCategory, selectProteinPerGram, selectCarbsPerGram, selectFatPerGram, selectCaloriesPerGram } from '../slices/currentItemSlice';
 
 const Header = (props) => (
   <View {...props}>
-    <Text category="h6">{props.data.name.toUpperCase()}</Text>
+    <Text category="h6">{props.name.toUpperCase()}</Text>
     <Text category="s1">(Product)</Text>
   </View>
 );
 
 const Footer = (props) => (
   <View {...props} style={[props.style, styles.footerContainer]}>
-    <Button style={styles.footerControl} size="small">
+    <Button style={styles.footerControl} size="medium" onPress={() => props.navigation.navigate('TrackFoodScreen')}>
       TRACK
     </Button>
   </View>
 );
 
 const ProductDetailsScreen = () => {
+  const navigation = useNavigation();
+
   const currentItemId = useSelector(selectId);
-  const dispatch = useDispatch();
-  const { data, error, isLoading } = useGetProductInformationQuery(currentItemId);
-  if (data) {
-    dispatch(setId(data.id));
-    dispatch(setName(data.name));
-    dispatch(setCategory('recipes'));
-    dispatch(setImage(data.image));
-    dispatch(setProteinPerServing(data.proteinPerServing));
-    dispatch(setCarbsPerServing(data.carbsPerServing));
-    dispatch(setFatPerServing(data.fatPerServing));
-    dispatch(setCaloriesPerServing(data.caloriesPerServing));
-  }
+  const name = useSelector(selectName);
+  const category = useSelector(selectCategory);
+  const proteinPerGram = useSelector(selectProteinPerGram);
+  const carbsPerGram = useSelector(selectCarbsPerGram);
+  const fatPerGram = useSelector(selectFatPerGram);
+  const caloriesPerGram = useSelector(selectCaloriesPerGram);
+  const image = useSelector(selectImage);
+
+  const macroPer100Grams = (macro) => {
+    return +(macro * 100).toFixed(2);
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <Layout style={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center' }}>
-        {isLoading ? (
-          <Spinner />
-        ) : error ? (
-          <Text>Ooops, we don't have nutrional information on this product</Text>
-        ) : (
-          <Card style={styles.card} header={<Header data={data} />} footer={<Footer data={data} />}>
-            <Image style={styles.image} source={{ uri: data.image }} />
-            <Text>Caloric Breakdown (per serving)</Text>
-            <Text>Calories: {+data.caloriesPerServing.toFixed(2)}Kcal</Text>
-            <Text>Protein: {+data.proteinPerServing.toFixed(2)}g</Text>
-            <Text>Carbs: {+data.carbsPerServing.toFixed(2)}g</Text>
-            <Text>Fat: {+data.fatPerServing.toFixed(2)}g</Text>
-          </Card>
-        )}
+    <SafeAreaView style={styles.container}>
+      <Layout style={styles.layout}>
+        <Card style={styles.card} header={<Header name={name} />} footer={<Footer navigation={navigation} />}>
+          <Image style={styles.image} source={{ uri: image }} />
+          <Text>Caloric Breakdown (100g)</Text>
+          <Text>Calories: {macroPer100Grams(caloriesPerGram)}Kcal</Text>
+          <Text>Protein: {macroPer100Grams(proteinPerGram)}g</Text>
+          <Text>Carbs: {macroPer100Grams(carbsPerGram)}g</Text>
+          <Text>Fat: {macroPer100Grams(fatPerGram)}g</Text>
+        </Card>
       </Layout>
     </SafeAreaView>
   );
@@ -77,15 +55,25 @@ const ProductDetailsScreen = () => {
 export default ProductDetailsScreen;
 
 const styles = StyleSheet.create({
-  topContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    textAlign: 'center'
+  layout: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#fe615a'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fe615a'
+  },
+  similarRecipesContainer: {
+    flex: 1,
+    width: '85%'
   },
   card: {
     flex: 1,
     margin: 2,
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '85%'
   },
   footerContainer: {
     flexDirection: 'row',
@@ -98,5 +86,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: 250,
     height: 190
+  },
+  similarRecipesHeading: {
+    textAlign: 'left',
+    alignSelf: 'flex-start',
+    marginTop: 20,
+    marginBottom: 10,
+    color: '#fff'
   }
 });
