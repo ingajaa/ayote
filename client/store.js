@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './slices/searchSlice';
 import currentItemReducer from './slices/currentItemSlice';
 import waterReducer from './slices/waterSlice';
+import caffeineReducer from './slices/caffeineSlice';
 import userProfileReducer from './slices/userProfileSlice';
 import customMealReducer from './slices/customMealSlice';
 import { spoonacularApi } from './services/spoonacular';
@@ -17,6 +18,7 @@ export const store = configureStore({
     water: waterReducer,
     userProfile: userProfileReducer,
     customMeal: customMealReducer,
+    caffeine: caffeineReducer,
 
     // Services
     [spoonacularApi.reducerPath]: spoonacularApi.reducer,

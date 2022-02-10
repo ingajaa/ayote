@@ -1,33 +1,26 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  glassCount: 0,
-  dailyGlassGoal: null
+  cupCount: 0
 };
 
-export const waterSlice = createSlice({
-  name: 'water',
+export const coffeeSlice = createSlice({
+  name: 'caffeine',
   initialState,
   reducers: {
-    setGlassCount: (state, action) => {
-      state.glassCount = action.payload;
+    setCupCount: (state, action) => {
+      state.cupCount = action.payload;
     },
-    setDailyGlassGoal: (state, action) => {
-      state.dailyGlassGoal = action.payload;
-    },
-    addGlass: (state, action) => {
-      state.glassCount++;
+    addCup: (state, action) => {
+      state.cupCount++;
     }
   }
 });
 
-export const { setGlassCount, addGlass, setDailyGlassGoal } = waterSlice.actions;
+export const { setCupCount, addCup } = coffeeSlice.actions;
 
-export const selectGlassCount = (state) => {
-  return state.water.glassCount;
-};
-export const selectDailyGlassGoal = (state) => {
-  return state.water.dailyGlassGoal;
+export const selectCupCount = (state) => {
+  return state.caffeine.cupCount;
 };
 
-export default waterSlice.reducer;
+export default coffeeSlice.reducer;
