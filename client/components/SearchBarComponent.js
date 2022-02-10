@@ -7,9 +7,7 @@ const SearchBarComponent = () => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('SearchResultsScreen')}
-    style={styles.container}
-    >
+    <TouchableOpacity onPress={() => navigation.navigate('SearchResultsScreen')} style={styles.container}>
       <View pointerEvents="none">
         <Searchbar placeholder="Search" style={styles.searchBar} />
       </View>

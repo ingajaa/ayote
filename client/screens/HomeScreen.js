@@ -5,7 +5,7 @@ import { Layout } from '@ui-kitten/components';
 import TopNav from '../components/TopNav';
 import LogoComponent from '../components/LogoComponent';
 import SearchBarComponent from '../components/SearchBarComponent';
-import MacroBar from '../components/MacroBar';
+import MacroStats from '../components/MacroStats';
 import MealContainer from '../components/MealContainer';
 import BottomNav from '../components/BottomNav';
 import { useGetUserProfileQuery } from '../services/ayote';
@@ -15,12 +15,12 @@ import { setUserId, setDailyCaloriesGoal, setDailyGlassCountGoal } from '../slic
 const HomeScreen = () => {
   return (
     <Fragment>
-      <SafeAreaView style={{ flex: 0, backgroundColor: "#151515" }} />
+      <SafeAreaView style={{ flex: 0, backgroundColor: '#151515' }} />
       <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         <Layout style={styles.Layout}>
           <TopNav />
           <SearchBarComponent />
-          <MacroBar />
+          <MacroStats />
           <MealContainer />
           <BottomNav />
         </Layout>
@@ -33,8 +33,9 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   Layout: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: "#151515" }
+    backgroundColor: '#151515'
+  }
 });
