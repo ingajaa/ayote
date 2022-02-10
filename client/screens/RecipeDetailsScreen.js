@@ -84,12 +84,14 @@ const RecipeDetailsScreen = () => {
               footer={<Footer data={data}
               navigation={navigation} />}
               >
+                <View style={styles.nutrionalInfoContainer}>
                 <Image style={styles.image} source={{ uri: data.image }} />
-                <Text>Caloric Breakdown (100g)</Text>
-                <Text>Calories: {+(data.caloriesPerGram * 100).toFixed(2)}Kcal</Text>
-                <Text>Protein: {+(data.proteinPerGram * 100).toFixed(2)}g</Text>
-                <Text>Carbs: {+(data.carbsPerGram * 100).toFixed(2)}g</Text>
-                <Text>Fat: {+(data.fatPerGram * 100).toFixed(2)}g</Text>
+                <Text style={styles.caloricBreakdown}>Caloric Breakdown (100g)</Text>
+                <Text style={styles.calories}>Calories: {+(data.caloriesPerGram * 100).toFixed(2)}Kcal</Text>
+                <Text style={styles.protein}>Protein: {+(data.proteinPerGram * 100).toFixed(2)}g</Text>
+                <Text style={styles.carbs}>Carbs: {+(data.carbsPerGram * 100).toFixed(2)}g</Text>
+                <Text style={styles.fat}>Fat: {+(data.fatPerGram * 100).toFixed(2)}g</Text>
+                </View>
               </Card>
               {similarRecipes.length > 0 && (
                 <View style={styles.similarRecipesContainer}>
@@ -144,13 +146,44 @@ const styles = StyleSheet.create({
   image: {
     alignSelf: 'center',
     width: 250,
-    height: 190
+    height: 190,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10
   },
   similarRecipesHeading: {
     textAlign: 'left',
     alignSelf: 'flex-start',
     marginTop: 20,
     marginBottom: 10,
+    color: '#fff'
+  },
+  nutrionalInfoContainer: {
+    borderWidth: 1,
+    marginTop: 0,
+    marginBottom: 0,
+    borderRadius: 10,
+    backgroundColor: '#151515',
+    paddingHorizontal: 20,
+    paddingVertical: 20
+  },
+  caloricBreakdown: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  calories: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  carbs: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  protein: {
+    alignSelf: 'center',
+    color: '#fff'
+  },
+  fat: {
+    alignSelf: 'center',
     color: '#fff'
   }
 });
