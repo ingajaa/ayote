@@ -4,14 +4,9 @@ import Svg, { Circle } from 'react-native-svg';
 import Animated, { useSharedValue, useDerivedValue, withTiming, useAnimatedProps } from 'react-native-reanimated';
 import { ReText } from 'react-native-redash';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectGlassCount, addGlass, setGlassCount, selectDailyGlassGoal } from '../slices/waterSlice';
+import { selectCupCount, addCup } from '../slices/caffeineSlice';
 import BackTopNav from '../components/BackTopNav';
-import {
-  selectDailyGlassCountGoal,
-  setDailyGlassCountGoal,
-  selectDailyCaffeineCountGoal,
-  setDailyCaffeineCountGoal
-} from '../slices/userProfileSlice';
+import { selectDailyCaffeineCountGoal, setDailyCaffeineCountGoal } from '../slices/userProfileSlice';
 import { useGetUserProfileQuery } from '../services/ayote';
 
 const BACKGROUND_COLOR = '#d4f1f9';
@@ -26,22 +21,22 @@ const R = CIRCLE_LENGTH / (2 * Math.PI);
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const WaterTrackScreen = () => {
-  const glasses = useSelector(selectGlassCount);
-  const progress = useSharedValue(glasses);
+const CaffeineTrackScreen = () => {
+  const cups = useSelector(selectCupCount);
+  const progress = useSharedValue(cups);
   const dispatch = useDispatch();
 
   const { data, error, isLoading } = useGetUserProfileQuery(1);
   if (data && data.length > 0) {
-    dispatch(setDailyGlassCountGoal(data[0].dailyGlassCountGoal));
+    dispatch(setDailyCaffeineCountGoal(data[0].dailyCaffeineCountGoal));
   }
 
-  const dailyGlassCountGoal = useSelector(selectDailyGlassCountGoal);
+  const dailyCaffeineCountGoal = useSelector(selectDailyCaffeineCountGoal);
 
   const [buttonValue, setButtonValue] = useState('Add Cup');
 
   useEffect(() => {
-    if (dailyGlassCountGoal) glasses >= dailyGlassCountGoal ? setButtonValue(`That's a cap`) : setButtonValue(`Add Cup`);
+    if (dailyCaffeineCountGoal) cups >= dailyCaffeineCountGoal ? setButtonValue(`That's a cap`) : setButtonValue(`Add Cup`);
   });
 
   const animatedProps = useAnimatedProps(() => ({
@@ -53,10 +48,10 @@ const WaterTrackScreen = () => {
   });
 
   const onPress = useCallback(async () => {
-    if ((await progress.value) >= (await dailyGlassCountGoal)) return;
+    if ((await progress.value) >= (await dailyCaffeineCountGoal)) return;
     else {
       progress.value = await withTiming(progress.value + 1, { duration: 200 });
-      dispatch(addGlass());
+      dispatch(addCup());
     }
   });
 
@@ -64,11 +59,21 @@ const WaterTrackScreen = () => {
     <SafeAreaView style={styles.safeArea}>
       <BackTopNav backgroundColor={BACKGROUND_COLOR} iconFill={ICON_FILL} />
       <View style={styles.container}>
-        <Text style={styles.glassesOfWaterText}>Cups Of Coffee</Text>
+        <Text style={styles.cupsOfCoffeeText}>Cups Of Coffee</Text>
         <ReText style={styles.progressText} text={progressText} />
         <Svg style={styles.svg}>
           <Circle cx={width / 2} cy={height / 2} r={R} stroke={BACKGROUND_STROKE_COLOR} strokeWidth={30} />
-          <AnimatedCircle style={styles.circle} cx={width / 2} cy={height / 2} r={R} stroke={STROKE_COLOR} strokeWidth={15} strokeDasharray={CIRCLE_LENGTH} animatedProps={animatedProps} strokeLinecap={'round'} />
+          <AnimatedCircle
+            style={styles.circle}
+            cx={width / 2}
+            cy={height / 2}
+            r={R}
+            stroke={STROKE_COLOR}
+            strokeWidth={15}
+            strokeDasharray={CIRCLE_LENGTH}
+            animatedProps={animatedProps}
+            strokeLinecap={'round'}
+          />
         </Svg>
         <TouchableOpacity style={styles.button} onPress={onPress}>
           <Text style={styles.buttonText}>{buttonValue}</Text>
@@ -78,7 +83,7 @@ const WaterTrackScreen = () => {
   );
 };
 
-export default WaterTrackScreen;
+export default CaffeineTrackScreen;
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -95,9 +100,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: '20%'
   },
-  glassesOfWaterText: {
+  cupsOfCoffee: {
     // position: 'absolute',
-
   },
   progressText: {
     fontSize: 40,
@@ -107,7 +111,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'relative',
     bottom: '12%'
-
   },
   button: {
     position: 'absolute',
@@ -117,7 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND_STROKE_COLOR,
     borderRadius: 25,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   buttonText: {
     fontSize: 20,
@@ -127,12 +130,9 @@ const styles = StyleSheet.create({
   }
 });
 
-
-
 // import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 // import React from 'react';
 // import CircularProgress from 'react-native-circular-progress-indicator';
-
 
 // const CaffeineTrackerScreen = () => {
 //   return (
