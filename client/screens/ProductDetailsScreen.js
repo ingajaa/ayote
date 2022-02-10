@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#fe615a'
+    backgroundColor: '#151515'
   },
   similarRecipesContainer: {
     flex: 1,

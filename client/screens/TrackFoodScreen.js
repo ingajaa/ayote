@@ -90,14 +90,14 @@ const TrackFoodScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#151515' }}>
       <Layout style={styles.container} level="1">
-        <Text>{foodName?.toUpperCase()}</Text>
+        <Text style={styles.foodName}>{foodName?.toUpperCase()}</Text>
         <Input style={styles.input} placeholder="Quantity in grams" value={trackedGrams} onChangeText={onChange} />
-        <Text>Calories: {trackedCalories}</Text>
-        <Text>Protein: {trackedProtein}</Text>
-        <Text>Carbs: {trackedCarbs}</Text>
-        <Text>Fat: {trackedFat}</Text>
+        <Text style={styles.caloriesText} >Calories: {trackedCalories}</Text>
+        <Text style={styles.proteinText} >Protein: {trackedProtein}</Text>
+        <Text style={styles.carbsText}>Carbs: {trackedCarbs}</Text>
+        <Text style={styles.fatText}>Fat: {trackedFat}</Text>
         <Button style={styles.submit} size="medium" onPress={onButtonPress}>
           ADD
         </Button>
@@ -114,7 +114,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    paddingHorizontal: 30
+    paddingHorizontal: 30,
+    backgroundColor: '#151515'
+  },
+  foodName: {
+    color: '#fff'
   },
   input: {
     borderColor: '#696a6b',
@@ -123,5 +127,17 @@ const styles = StyleSheet.create({
   },
   submit: {
     marginTop: 20
+  },
+  caloriesText: {
+    color: '#fff'
+  },
+  proteinText: {
+    color: '#fff'
+  },
+  carbsText: {
+    color: '#fff'
+  },
+  fatText: {
+    color: '#fff'
   }
 });
