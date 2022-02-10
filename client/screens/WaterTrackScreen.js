@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
   glassesOfWaterText: {
     color: '#A6E1FA',
     bottom: '46%',
-    fontSize: 25
+    fontSize: 22
   },
   progressText: {
     fontSize: 70,
