@@ -108,7 +108,7 @@ const MealContainer = () => {
       {data && data.length > 0 ? (
         <FlatList data={data} renderItem={renderItem} keyExtractor={(item) => item._id} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false} />
       ) : (
-        <Text style={styles.text}>You are not tracking any meal..</Text>
+        <Text style={styles.noMealText}>You are not tracking any meal..</Text>
       )}
     </View>
   );
@@ -248,6 +248,11 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 9,
     marginHorizontal: 5
+  },
+  noMealText: {
+    color: '#fff',
+    textAlign: 'center',
+    marginTop: 50
   }
 });
 
