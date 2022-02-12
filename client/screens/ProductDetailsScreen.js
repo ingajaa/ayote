@@ -17,7 +17,7 @@ import {
 const Header = (props) => (
   <View {...props}>
     <Text category="h6">{props.name.toUpperCase()}</Text>
-    <Text category="s1">(Product)</Text>
+    <Text category="s1"></Text>
   </View>
 );
 
